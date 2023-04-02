@@ -9,14 +9,15 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.boyzcompany.app</groupId>
-	<artifactId>Greenboard</artifactId>
+	<artifactId>App</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>Greenboard</name>
+	<name>App</name>
 	<description>Project</description>
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
 		<java.version>17</java.version>
+		<start-class>com.boyzcompany.unist.App</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -33,6 +34,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
+			<version>3.0.4</version>
 		</dependency>
 	</dependencies>
 

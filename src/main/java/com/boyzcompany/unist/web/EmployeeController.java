@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,8 @@ import com.boyzcompany.unist.model.Employee;
 
 @RestController
 public class EmployeeController {
+
+    int idCounter = 1;
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -39,19 +42,30 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/employees", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addEmployee(@RequestBody Employee employee) {
+    public String addEmployee(@RequestBody Employee employee) {
+        employee.setEmployeeId(String.valueOf(this.idCounter));
+        this.idCounter++;
         employeeRepository.save(employee);
+        return employee.getEmployeeId();
     }
 
     @PutMapping("/employees/{id}")
-    public void replaceEmployee(@PathVariable String id, @RequestBody Employee employee) {
-        employeeRepository.deleteById(id);
-        employee.setEmployeeId(id);
-        employeeRepository.save(employee);
+    public String replaceEmployee(@PathVariable String id, @RequestBody Employee employee) {
+        if (id.length() > 0) {
+            employeeRepository.deleteById(id);
+            employee.setEmployeeId(id);
+            employeeRepository.save(employee);
+            return id;
+        } else
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
     }
 
     @DeleteMapping("/employees/{id}")
-    public void deleteEmployee(@PathVariable String id) {
-        employeeRepository.deleteById(id);
+    public String deleteEmployee(@PathVariable String id) {
+        if (employeeRepository.existsById(id)) {
+            employeeRepository.deleteById(id);
+            return id;
+        } else
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 }

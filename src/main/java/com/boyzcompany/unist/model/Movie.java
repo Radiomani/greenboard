@@ -11,7 +11,7 @@ public class Movie {
     @Id
     private String movieId;
     private String name;
-    private List <String> genre;
+    private List<String> genre;
 
     public String getMovieId() {
         return movieId;

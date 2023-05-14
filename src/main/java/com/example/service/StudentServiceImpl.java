@@ -54,10 +54,8 @@ public class StudentServiceImpl implements StudentService{
     public UpdateResult updateStudentById(int id, Student updated_student) {
         Query query = new Query(Criteria.where("student_id").is(id));
         Update update = new Update()
-        .set("gender", updated_student.getGender())
-        .set("age", updated_student.getAge())
-        .set("occupation", updated_student.getOccupation())
-        .set("zip_code", updated_student.getZip_code());
+        .set("name", updated_student.getName())
+        .set("email", updated_student.getEmail());
         UpdateResult result = mongoTemplate.updateFirst(query, update, Student.class);
         return result;
     }

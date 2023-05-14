@@ -15,10 +15,8 @@ public class Student {
 	@Id
 	private String id;
 	private int student_id;
-	private String gender;
-	private int age;
-	private int occupation;
-	private String zip_code;
+	private String email;
+	private String name;
 
 	// Student_id,gender,age,occupation,zip_code
 
@@ -41,10 +39,8 @@ public class Student {
     // }
 
 	public int getStudent_id() { return this.student_id; }
-	public String getGender() { return this.gender; }
-	public int getAge() { return this.age; }
-	public int getOccupation() { return this.occupation; }
-	public String getZip_code() { return this.zip_code; }
+	public String getEmail() { return this.email; }
+	public String getName() { return this.name; }
 
 	public void setStudentId(int id) { this.student_id = id; }
 }

@@ -26,60 +26,60 @@ import org.springframework.data.mongodb.core.query.Criteria;
 public class AnnouncementServiceImpl implements AnnouncementService{
     
     @Autowired
-    private AnnouncementRepository ratingRepository;
+    private AnnouncementRepository announcementRepository;
     @Autowired
     private MongoTemplate mongoTemplate;
 
     @Override
-    public String save(Announcement rating){
-        return ratingRepository.save(rating).getId();
+    public String save(Announcement announcement){
+        return announcementRepository.save(announcement).getId();
     }
 
     @Override
-    public Result<List<Object>> getMovieRatingGTE(double rating){
-        if(rating < 1 || rating > 5) {
+    public Result<List<Object>> getStudentAnnouncementGTE(double announcement){
+        if(announcement < 1 || announcement > 5) {
             return new Result<List<Object>>(false);
         }
 
-        // Efficiently calculate the average rating of each movie
-        GroupOperation avgRating = Aggregation.group("$movie_id")
-                                            .avg("$rating").
-                                            as("avg_rating");
+        // Efficiently calculate the average announcement of each student
+        GroupOperation avgAnnouncement = Aggregation.group("$student_id")
+                                            .avg("$announcement").
+                                            as("avg_announcement");
 
-        // Create a Matching criteria for each movie, where the average rating should be >= the threshold.
-        MatchOperation filterRating = Aggregation.match(
-            Criteria.where("avg_rating").gte(rating)
+        // Create a Matching criteria for each student, where the average announcement should be >= the threshold.
+        MatchOperation filterannouncement = Aggregation.match(
+            Criteria.where("avg_announcement").gte(announcement)
         );
 
         // Sort the movies by their ID
-        SortOperation sortOperation = Aggregation.sort(Sort.Direction.ASC, "movie_id");
+        SortOperation sortOperation = Aggregation.sort(Sort.Direction.ASC, "student_id");
 
-        // Assign the movie ID to their information from the movie collection
-        LookupOperation movieLookup = Aggregation.lookup("movie", "_id", "movie_id", "matching_movie");
+        // Assign the student ID to their information from the student collection
+        LookupOperation studentLookup = Aggregation.lookup("student", "_id", "student_id", "matching_student");
 
-        // Unwind the movie information, i.e., remove the unnecessary brackets
-        UnwindOperation unwindMovie = Aggregation.unwind("$matching_movie");
+        // Unwind the student information, i.e., remove the unnecessary brackets
+        UnwindOperation unwindstudent = Aggregation.unwind("$matching_student");
 
-        // Make the matching movies as root
-        ReplaceRootOperation replaceRoot = Aggregation.replaceRoot("$matching_movie");
+        // Make the matching students as root
+        ReplaceRootOperation replaceRoot = Aggregation.replaceRoot("$matching_student");
 
-        // Only consider movie names and their genres
-        ProjectionOperation projectMovie = Aggregation.project("movie_name", "genre")
+        // Only consider student names and their genres
+        ProjectionOperation projectstudent = Aggregation.project("student_name", "genre")
                                                       .andExclude("_id");
         // Finalize the query
         Aggregation aggregation = Aggregation.newAggregation(
-            avgRating,
-            filterRating,
+            avgAnnouncement,
+            filterannouncement,
             sortOperation,
-            movieLookup,
-            unwindMovie,
+            studentLookup,
+            unwindstudent,
             replaceRoot,
-            projectMovie
+            projectstudent
         );
 
         AggregationResults<Object> results = mongoTemplate.aggregate(
             aggregation, 
-            "rating", 
+            "announcement", 
             Object.class
         );
 

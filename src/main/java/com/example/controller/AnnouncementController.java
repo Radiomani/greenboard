@@ -21,11 +21,11 @@ import com.example.model.Result;
 import com.example.service.AnnouncementService;
 
 @RestController
-@RequestMapping("/ratings")
+@RequestMapping("/announcements")
 public class AnnouncementController {
 
     @Autowired
-    private AnnouncementService ratingService;
+    private AnnouncementService announcementService;
 
     @ExceptionHandler(ParameterErrorNumberException.class)
     public ResponseEntity<String> handleParameterErrorNumber() {
@@ -40,16 +40,16 @@ public class AnnouncementController {
     }
 
     @PostMapping
-    public String save(@RequestBody Announcement rating) {
-        return ratingService.save(rating);
+    public String save(@RequestBody Announcement announcement) {
+        return announcementService.save(announcement);
     }
 
-    @GetMapping("/{rating}")
+    @GetMapping("/{announcement}")
     @ResponseBody
-    public ResponseEntity<List<Object>> getRating(@PathVariable("rating") String rating) {
+    public ResponseEntity<List<Object>> getAnnouncement(@PathVariable("announcement") String announcement) {
         try {
-            double ratingNum = Double.parseDouble(rating);
-            Result<List<Object>> result = ratingService.getMovieRatingGTE(ratingNum);
+            double announcementNum = Double.parseDouble(announcement);
+            Result<List<Object>> result = announcementService.getStudentAnnouncementGTE(announcementNum);
             if(result.isOK()) {
                 return ResponseEntity.ok(result.getResult());
             }

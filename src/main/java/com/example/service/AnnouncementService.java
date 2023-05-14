@@ -9,6 +9,6 @@ public interface AnnouncementService {
 
     String save(Announcement rating);
 
-    Result<List<Object>> getMovieRatingGTE(double rating);
+    Result<List<Object>> getStudentAnnouncementGTE(double rating);
 
 }

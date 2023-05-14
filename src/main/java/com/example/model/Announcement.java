@@ -8,27 +8,26 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 @Data
-@Document(collection = "rating")
+@Document(collection = "announcement")
 @JsonInclude(JsonInclude.Include.NON_NULL) //include only non_null values
 public class Announcement {
 
 	@Id
 	private String id;
 	private int user_id;
-	private int movie_id;
-	private int rating;
+	private int student_id;
+	private int announcement;
 	private int timestamp;
 
 	public Announcement() {
     }
 
-    public Announcement(int user_id, int movie_id, int rating, int timestamp) {
-        this.user_id = user_id;
-		this.movie_id = movie_id;
-		this.rating = rating;
+    public Announcement(int student_id, int announcement, int timestamp) {
+		this.student_id = student_id;
+		this.announcement = announcement;
 		this.timestamp = timestamp;
     }
 
-	public int getMovieId() { return this.movie_id; }
-	public int getRating() { return this.rating; }
+	public int getStudentId() { return this.student_id; }
+	public int getAnnouncement() { return this.announcement; }
 }

@@ -12,20 +12,20 @@ import com.example.model.Course;
 import com.example.service.CourseService;
 
 @RestController
-@RequestMapping("/movies")
+@RequestMapping("/courses")
 public class CourseController {
 
     @Autowired
-    private CourseService movieService;
+    private CourseService courseService;
 
     // @PostMapping
-    // public String save(@RequestBody Movie movie) {
-    //     return movieService.save(movie);
+    // public String save(@RequestBody Course course) {
+    //     return courseService.save(course);
     // }
 
-    @GetMapping("/{movie}")
+    @GetMapping("/{course}")
     @ResponseBody
-    public Course getMovie(@PathVariable("movie") int movie) {
-        return movieService.getMovieById(movie);
+    public Course getcourse(@PathVariable("course") int course) {
+        return courseService.getCourseById(course);
     }
 }

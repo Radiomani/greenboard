@@ -57,20 +57,10 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable("id") String id) {
-        if(id.length() == 0) {
-            throw new ParameterErrorStringException("Parameter is not a number!");
-        }
-        try {
-            int student_id = Integer.parseInt(id);
-            Optional<Student> result = studentService.getStudentById(student_id);
-            if(result.isPresent()) {
-                return ResponseEntity.ok(result.get());
-            }
-            throw new ParameterErrorNumberException("Student id does not exist!");
-        } catch(NumberFormatException e) {
-            throw new ParameterErrorStringException("Parameter is not a number!");
-        }
+    public ResponseEntity<Optional<Student>> getStudent(@PathVariable("id") String id) {
+       
+                return ResponseEntity.ok(studentService.getStudentById(id));
+            
     }
 
     @PutMapping("/{id}")

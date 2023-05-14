@@ -23,9 +23,9 @@ public class CourseController {
     //     return courseService.save(course);
     // }
 
-    @GetMapping("/{course}")
+    @GetMapping("/{course_id}")
     @ResponseBody
-    public Course getcourse(@PathVariable("course") int course) {
-        return courseService.getCourseById(course);
+    public Course getcourse(@PathVariable("course") String course_id) {
+        return courseService.getCourseById(course_id);
     }
 }

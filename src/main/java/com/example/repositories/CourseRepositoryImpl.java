@@ -16,14 +16,14 @@ public class CourseRepositoryImpl implements CourseRepository {
     @Autowired
     MongoTemplate mongoTemplate;
 
-    public Course findMovieByMovieID(int movie_id) {
-        Query query = new Query(Criteria.where("movie_id").is(movie_id));
+    public Course findCourseByCourseID(int course_id) {
+        Query query = new Query(Criteria.where("course_id").is(course_id));
         Course result = mongoTemplate.findOne(query, Course.class);
         return result;
     }
 
-    public Course findMovieByName(String movie_name) {
-        Query query = new Query(Criteria.where("movie_name").is(movie_name));
+    public Course findCourseByName(String course_name) {
+        Query query = new Query(Criteria.where("course_name").is(course_name));
         Course result = mongoTemplate.findOne(query, Course.class);
         return result;
     }

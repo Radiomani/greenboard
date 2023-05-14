@@ -4,7 +4,7 @@ import com.example.model.Course;
 
 public interface CourseService {
 
-    public Course getMovieById(int id);
+    public Course getCourseById(int id);
 
     public long count();
 }

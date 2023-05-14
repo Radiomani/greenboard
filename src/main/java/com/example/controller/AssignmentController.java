@@ -47,7 +47,7 @@ public class AssignmentController {
     }
 
     @PostMapping
-    public ResponseEntity<Assignment> subtmitAssignment(@RequestBody Assignment assignment ) {
+    public void subtmitAssignment(@RequestBody Assignment assignment ) {
         String new_id = assignmentService.subtmitAssignment(assignment);
         Optional<Assignment> new_assignment = assignmentService.getAssignmentById(new_id);
         if(new_assignment == null) {
@@ -57,20 +57,10 @@ public class AssignmentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Assignment> getAssignment(@PathVariable("id") String id) {
-        if(id.length() == 0) {
-            throw new ParameterErrorStringException("Parameter is not a number!");
-        }
-        try {
-            int assignment_id = Integer.parseInt(id);
-            Optional<Assignment> result = assignmentService.getAssignmentById(assignment_id);
-            if(result.isPresent()) {
-                return ResponseEntity.ok(result.get());
-            }
-            throw new ParameterErrorNumberException("Assignment id does not exist!");
-        } catch(NumberFormatException e) {
-            throw new ParameterErrorStringException("Parameter is not a number!");
-        }
+    public ResponseEntity<Optional<Assignment>> getAssignment(@PathVariable("id") String id) {
+       
+            return ResponseEntity.ok(assignmentService.getAssignmentById(id));
+           
     }
 
     @PutMapping("/{id}")

@@ -46,4 +46,5 @@ public class AnnouncementController {
             return ResponseEntity.ok(announcementService.getAnnouncementsByUserID(id));
         
     }
+    
 }

@@ -8,26 +8,33 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 @Data
-@Document(collection = "announcement")
-@JsonInclude(JsonInclude.Include.NON_NULL) //include only non_null values
+@Document(collection = "announcements")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Announcement {
 
 	@Id
 	private String id;
-	private int user_id;
-	private int student_id;
-	private int announcement;
+	private String course_id;
+	private String course_name;
+	private String ann_header;
 	private int timestamp;
 
 	public Announcement() {
     }
 
-    public Announcement(int student_id, int announcement, int timestamp) {
-		this.student_id = student_id;
-		this.announcement = announcement;
+    public Announcement(String course_id, String course_name,
+						String ann_header, int timestamp) {
+		this.course_id = course_id;
+		this.course_name = course_name;
+		this.ann_header = ann_header;
 		this.timestamp = timestamp;
     }
 
-	public int getStudentId() { return this.student_id; }
-	public int getAnnouncement() { return this.announcement; }
-}
+	public String getCourseID() { return this.course_id; }
+	public String getCourseName() { return this.course_name; }
+	public String getAnnHeader() { return this.ann_header; }
+	public int getTimeStamp() { return this.timestamp; }
+	public void setCourseID(String course_id) { this.course_id = course_id; }
+	public void setCourseName(String course_name) { this.course_name = course_name; }
+	public void setAnnHeader(String ann_header) { this.ann_header = ann_header; }
+	public void setTimeStamp(int timestamp) { this.timestamp = timestamp; }}

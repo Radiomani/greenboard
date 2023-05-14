@@ -3,5 +3,5 @@ package com.example.service;
 import com.example.model.Course;
 
 public interface CourseService {
-    public Course getCourseById(int id);
+    public Course getCourseById(String course_id);
 }

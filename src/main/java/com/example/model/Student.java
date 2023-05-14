@@ -14,7 +14,7 @@ public class Student {
 
 	@Id
 	private String id;
-	private int student_id;
+	private String student_id;
 	private String email;
 	private String name;
 
@@ -23,24 +23,8 @@ public class Student {
 	public Student() {
     }
 
-	// public Student(String gender, int age, int occupation, String zip_code) {
-    //     this.gender = gender;
-	// 	this.age = age;
-	// 	this.occupation = occupation;
-	// 	this.zip_code = zip_code;
-    // }
-
-    // public Student(int Student_id, String gender, int age, int occupation, String zip_code) {
-	// 	this.Student_id = Student_id;
-    //     this.gender = gender;
-	// 	this.age = age;
-	// 	this.occupation = occupation;
-	// 	this.zip_code = zip_code;
-    // }
-
-	public int getStudent_id() { return this.student_id; }
+	public String getStudent_id() { return this.student_id; }
 	public String getEmail() { return this.email; }
 	public String getName() { return this.name; }
-
-	public void setStudentId(int id) { this.student_id = id; }
+	public void setStudentId(String id) { this.student_id = id; }
 }

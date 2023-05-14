@@ -12,7 +12,7 @@ import com.example.model.Course;
 import com.example.service.CourseService;
 
 @RestController
-@RequestMapping("/courses")
+@RequestMapping("greenboard/dashboard/courses")
 public class CourseController {
 
     @Autowired

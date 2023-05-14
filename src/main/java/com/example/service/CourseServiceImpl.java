@@ -11,20 +11,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CourseServiceImpl implements CourseService{
     
     @Autowired
-    private CourseRepository movieRepository;
+    private CourseRepository courseRepository;
 
     // @Override
-    // public String save(Movie movie){
-    //     return movieRepository.save(movie).getId();
+    // public String save(course course){
+    //     return courseRepository.save(course).getId();
     // }
 
     @Override
-    public Course getMovieById(int id){
-        return movieRepository.findMovieByMovieID(id);
+    public Course getCourseById(int id){
+        return courseRepository.findCourseByCourseID(id);
     }
 
     @Override
     public long count() {
-        return movieRepository.count();
+        return courseRepository.count();
     }
 }

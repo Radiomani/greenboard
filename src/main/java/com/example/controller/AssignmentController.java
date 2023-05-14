@@ -17,27 +17,27 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.exception.ObjectIdException;
 import com.example.exception.ParameterErrorNumberException;
 import com.example.exception.ParameterErrorStringException;
-import com.example.model.Student;
-import com.example.service.StudentService;
+import com.example.model.Assignment;
+import com.example.service.AssignmentService;
 import com.mongodb.client.result.UpdateResult;
 
 @RestController
-@RequestMapping("/students")
-public class StudentController {
+@RequestMapping("/Assignments")
+public class AssignmentController {
 
     @Autowired
-    private StudentService studentService;
+    private AssignmentService assignAssignmentService;
 
     @ExceptionHandler(ObjectIdException.class)
     public ResponseEntity<String> handleObjectIdException() {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                             .body("Something wrong when saving the student");
+                             .body("Something wrong when saving the assignAssignment");
     }
 
     @ExceptionHandler(ParameterErrorNumberException.class)
     public ResponseEntity<String> handleParameterErrorNumber() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                             .body("student id does not exist!");
+                             .body("assignAssignment id does not exist!");
     }
 
     @ExceptionHandler(ParameterErrorStringException.class)
@@ -47,47 +47,47 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> savestudent(@RequestBody Student student) {
-        String new_id = studentService.save(student);
-        Optional<Student> new_student = studentService.getStudentById(new_id);
-        if(new_student == null) {
-            throw new ObjectIdException("Something wrong when saving the student!");
+    public ResponseEntity<Assignment> saveAssignment(@RequestBody Assignment assignAssignment) {
+        String new_id = assignAssignmentService.save(assignAssignment);
+        Optional<Assignment> new_assignAssignment = assignAssignmentService.getAssignmentById(new_id);
+        if(new_assignAssignment == null) {
+            throw new ObjectIdException("Something wrong when saving the assignAssignment!");
         } 
-        return ResponseEntity.ok(new_student.get());
+        return ResponseEntity.ok(new_assignAssignment.get());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable("id") String id) {
+    public ResponseEntity<Assignment> getAssignment(@PathVariable("id") String id) {
         if(id.length() == 0) {
             throw new ParameterErrorStringException("Parameter is not a number!");
         }
         try {
-            int student_id = Integer.parseInt(id);
-            Optional<Student> result = studentService.getStudentById(student_id);
+            int assignAssignment_id = Integer.parseInt(id);
+            Optional<Assignment> result = assignAssignmentService.getAssignmentById(assignAssignment_id);
             if(result.isPresent()) {
                 return ResponseEntity.ok(result.get());
             }
-            throw new ParameterErrorNumberException("Student id does not exist!");
+            throw new ParameterErrorNumberException("Assignment id does not exist!");
         } catch(NumberFormatException e) {
             throw new ParameterErrorStringException("Parameter is not a number!");
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable("id") String id, @RequestBody Student student) {
+    public ResponseEntity<Assignment> updateAssignment(@PathVariable("id") String id, @RequestBody Assignment assignAssignment) {
         if(id.length() == 0) {
             throw new ParameterErrorStringException("Parameter is not a number!");
         }
         try {
-            int student_id = Integer.parseInt(id);
-            UpdateResult result = studentService.updateStudentById(student_id, student);
+            int assignAssignment_id = Integer.parseInt(id);
+            UpdateResult result = assignAssignmentService.updateAssignmentById(assignAssignment_id, assignAssignment);
             if(result.getMatchedCount() == 0) {
-                throw new ParameterErrorNumberException("student id does not exist!");
+                throw new ParameterErrorNumberException("Assignment id does not exist!");
             }
             if(!result.wasAcknowledged()) {
-                throw new ObjectIdException("Something wrong when saving the student!");
+                throw new ObjectIdException("Something wrong when saving the Assignment!");
             }
-            return ResponseEntity.ok(studentService.getStudentById(student_id).get());
+            return ResponseEntity.ok(assignAssignmentService.getAssignmentById(assignAssignment_id).get());
         } catch(NumberFormatException e) {
             throw new ParameterErrorStringException("Parameter is not a number!");
         }

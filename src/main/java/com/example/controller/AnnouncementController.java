@@ -21,7 +21,7 @@ import com.example.model.Result;
 import com.example.service.AnnouncementService;
 
 @RestController
-@RequestMapping("/announcements")
+@RequestMapping("/announcement")
 public class AnnouncementController {
 
     @Autowired
@@ -39,23 +39,11 @@ public class AnnouncementController {
                              .body("Parameter is not a number!");
     }
 
-    @PostMapping
-    public String save(@RequestBody Announcement announcement) {
-        return announcementService.save(announcement);
-    }
 
-    @GetMapping("/{announcement}")
+    @GetMapping("/ID")
     @ResponseBody
-    public ResponseEntity<List<Object>> getAnnouncement(@PathVariable("announcement") String announcement) {
-        try {
-            double announcementNum = Double.parseDouble(announcement);
-            Result<List<Object>> result = announcementService.getStudentAnnouncementGTE(announcementNum);
-            if(result.isOK()) {
-                return ResponseEntity.ok(result.getResult());
-            }
-            throw new ParameterErrorNumberException("Parameter is not in the range of [1, 5]!");
-        } catch (NumberFormatException e) {
-            throw new ParameterErrorStringException("Parameter is not a number!");
-        }
+    public ResponseEntity<List<Announcement>> getAnnouncementByUserID(@PathVariable("ID") String id) {
+            return ResponseEntity.ok(announcementService.getAnnouncementsByUserID(id));
+        
     }
 }

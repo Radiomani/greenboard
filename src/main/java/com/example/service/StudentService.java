@@ -8,15 +8,15 @@ import com.mongodb.client.result.UpdateResult;
 
 public interface StudentService {
 
-    String save(Student user);
+    String save(Student student);
 
-    List<Student> getUser();
+    List<Student> getStudent();
 
-    public Optional<Student> getUserById(int id);
+    public Optional<Student> getStudentById(int id);
 
-    public Optional<Student> getUserById(String id);
+    public Optional<Student> getStudentById(String id);
 
-    public UpdateResult updateUserById(int id, Student updated_user);
+    public UpdateResult updateStudentById(int id, Student updated_student);
 
     public int getMaxId();
 

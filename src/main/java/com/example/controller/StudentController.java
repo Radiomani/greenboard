@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.exception.ObjectIdException;
 import com.example.exception.ParameterErrorNumberException;
 import com.example.exception.ParameterErrorStringException;
-import com.example.model.User;
-import com.example.service.UserService;
+import com.example.model.Student;
+import com.example.service.StudentService;
 import com.mongodb.client.result.UpdateResult;
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class StudentController {
 
     @Autowired
-    private UserService userService;
+    private StudentService userService;
 
     @ExceptionHandler(ObjectIdException.class)
     public ResponseEntity<String> handleObjectIdException() {
@@ -47,9 +47,9 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> saveUser(@RequestBody User user) {
+    public ResponseEntity<Student> saveUser(@RequestBody Student user) {
         String new_id = userService.save(user);
-        Optional<User> new_user = userService.getUserById(new_id);
+        Optional<Student> new_user = userService.getUserById(new_id);
         if(new_user == null) {
             throw new ObjectIdException("Something wrong when saving the user!");
         } 
@@ -57,13 +57,13 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable("id") String id) {
+    public ResponseEntity<Student> getUser(@PathVariable("id") String id) {
         if(id.length() == 0) {
             throw new ParameterErrorStringException("Parameter is not a number!");
         }
         try {
             int user_id = Integer.parseInt(id);
-            Optional<User> result = userService.getUserById(user_id);
+            Optional<Student> result = userService.getUserById(user_id);
             if(result.isPresent()) {
                 return ResponseEntity.ok(result.get());
             }
@@ -74,7 +74,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") String id, @RequestBody User user) {
+    public ResponseEntity<Student> updateUser(@PathVariable("id") String id, @RequestBody Student user) {
         if(id.length() == 0) {
             throw new ParameterErrorStringException("Parameter is not a number!");
         }

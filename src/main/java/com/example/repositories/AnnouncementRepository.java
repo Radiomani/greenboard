@@ -4,10 +4,10 @@ package com.example.repositories;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.model.Rating;
+import com.example.model.Announcement;
 
 
 @Repository
-public interface RatingRepository extends MongoRepository<Rating, String> {
+public interface AnnouncementRepository extends MongoRepository<Announcement, String> {
 
 }

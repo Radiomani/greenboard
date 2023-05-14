@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.model.Movie;
-import com.example.service.MovieService;
+import com.example.model.Course;
+import com.example.service.CourseService;
 
 @RestController
 @RequestMapping("/movies")
-public class MovieController {
+public class CourseController {
 
     @Autowired
-    private MovieService movieService;
+    private CourseService movieService;
 
     // @PostMapping
     // public String save(@RequestBody Movie movie) {
@@ -25,7 +25,7 @@ public class MovieController {
 
     @GetMapping("/{movie}")
     @ResponseBody
-    public Movie getMovie(@PathVariable("movie") int movie) {
+    public Course getMovie(@PathVariable("movie") int movie) {
         return movieService.getMovieById(movie);
     }
 }

@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 @Document(collection = "user")
 @JsonInclude(JsonInclude.Include.NON_NULL) //include only non_null values
-public class User {
+public class Student {
 
 	@Id
 	private String id;
@@ -22,7 +22,7 @@ public class User {
 
 	// user_id,gender,age,occupation,zip_code
 
-	public User() {
+	public Student() {
     }
 
 	// public User(String gender, int age, int occupation, String zip_code) {

@@ -2,8 +2,8 @@ package com.example.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.model.User;
-import com.example.repositories.UserRepository;
+import com.example.model.Student;
+import com.example.repositories.StudentRepository;
 import com.mongodb.client.result.UpdateResult;
 
 import java.util.List;
@@ -17,28 +17,28 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class StudentServiceImpl implements StudentService{
     
     @Autowired
-    private UserRepository userRepository;
+    private StudentRepository userRepository;
     @Autowired
     private MongoTemplate mongoTemplate;
 
     @Override
-    public String save(User user){
+    public String save(Student user){
         user.setUserId(getMaxId() + 1);
         return userRepository.save(user).getId();
     }
 
     @Override
-    public List<User> getUser(){
+    public List<Student> getUser(){
         return userRepository.findAll();
     }
 
     @Override
-    public Optional<User> getUserById(int id) {
+    public Optional<Student> getUserById(int id) {
         Query query = new Query(Criteria.where("user_id").is(id));
-        User user = mongoTemplate.findOne(query, User.class);
+        Student user = mongoTemplate.findOne(query, Student.class);
         if(user == null) {
             return Optional.empty();
         }
@@ -46,19 +46,19 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<User> getUserById(String id) {
+    public Optional<Student> getUserById(String id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public UpdateResult updateUserById(int id, User updated_user) {
+    public UpdateResult updateUserById(int id, Student updated_user) {
         Query query = new Query(Criteria.where("user_id").is(id));
         Update update = new Update()
         .set("gender", updated_user.getGender())
         .set("age", updated_user.getAge())
         .set("occupation", updated_user.getOccupation())
         .set("zip_code", updated_user.getZip_code());
-        UpdateResult result = mongoTemplate.updateFirst(query, update, User.class);
+        UpdateResult result = mongoTemplate.updateFirst(query, update, Student.class);
         return result;
     }
 
@@ -66,6 +66,6 @@ public class UserServiceImpl implements UserService{
     public int getMaxId() {
         Query query = new Query();
         query.limit(1).with(Sort.by(Sort.Direction.DESC, "user_id"));
-        return mongoTemplate.find(query, User.class).get(0).getUser_id();
+        return mongoTemplate.find(query, Student.class).get(0).getUser_id();
     }
 }

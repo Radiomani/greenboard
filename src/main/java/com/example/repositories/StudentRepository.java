@@ -3,10 +3,10 @@ package com.example.repositories;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.model.User;
+import com.example.model.Student;
 
 
 @Repository
-public interface UserRepository extends MongoRepository<User, String> {
-    User findById();
+public interface StudentRepository extends MongoRepository<Student, String> {
+    Student findById();
 }

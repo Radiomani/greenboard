@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.exception.ParameterErrorNumberException;
 import com.example.exception.ParameterErrorStringException;
-import com.example.model.Rating;
+import com.example.model.Announcement;
 import com.example.model.Result;
-import com.example.service.RatingService;
+import com.example.service.AnnouncementService;
 
 @RestController
 @RequestMapping("/ratings")
-public class RatingController {
+public class AnnouncementController {
 
     @Autowired
-    private RatingService ratingService;
+    private AnnouncementService ratingService;
 
     @ExceptionHandler(ParameterErrorNumberException.class)
     public ResponseEntity<String> handleParameterErrorNumber() {
@@ -40,7 +40,7 @@ public class RatingController {
     }
 
     @PostMapping
-    public String save(@RequestBody Rating rating) {
+    public String save(@RequestBody Announcement rating) {
         return ratingService.save(rating);
     }
 

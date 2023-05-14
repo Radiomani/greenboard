@@ -1,10 +1,10 @@
 package com.example.repositories;
 
-import com.example.model.Movie;
+import com.example.model.Course;
 
 
-public interface MovieRepository {
-    public Movie findMovieByMovieID(int movie_id);
-    public Movie findMovieByName(String movie_name);
+public interface CourseRepository {
+    public Course findMovieByMovieID(int movie_id);
+    public Course findMovieByName(String movie_name);
     public long count();
 }

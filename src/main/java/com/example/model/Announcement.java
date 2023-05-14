@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 @Document(collection = "rating")
 @JsonInclude(JsonInclude.Include.NON_NULL) //include only non_null values
-public class Rating {
+public class Announcement {
 
 	@Id
 	private String id;
@@ -19,10 +19,10 @@ public class Rating {
 	private int rating;
 	private int timestamp;
 
-	public Rating() {
+	public Announcement() {
     }
 
-    public Rating(int user_id, int movie_id, int rating, int timestamp) {
+    public Announcement(int user_id, int movie_id, int rating, int timestamp) {
         this.user_id = user_id;
 		this.movie_id = movie_id;
 		this.rating = rating;

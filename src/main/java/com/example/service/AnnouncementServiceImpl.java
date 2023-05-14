@@ -2,9 +2,9 @@ package com.example.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.model.Rating;
+import com.example.model.Announcement;
 import com.example.model.Result;
-import com.example.repositories.RatingRepository;
+import com.example.repositories.AnnouncementRepository;
 
 import java.util.List;
 
@@ -23,15 +23,15 @@ import org.springframework.data.mongodb.core.aggregation.UnwindOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 
 @Service
-public class RatingServiceImpl implements RatingService{
+public class AnnouncementServiceImpl implements AnnouncementService{
     
     @Autowired
-    private RatingRepository ratingRepository;
+    private AnnouncementRepository ratingRepository;
     @Autowired
     private MongoTemplate mongoTemplate;
 
     @Override
-    public String save(Rating rating){
+    public String save(Announcement rating){
         return ratingRepository.save(rating).getId();
     }
 

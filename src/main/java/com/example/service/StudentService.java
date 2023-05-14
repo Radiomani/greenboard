@@ -3,20 +3,20 @@ package com.example.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.model.User;
+import com.example.model.Student;
 import com.mongodb.client.result.UpdateResult;
 
-public interface UserService {
+public interface StudentService {
 
-    String save(User user);
+    String save(Student user);
 
-    List<User> getUser();
+    List<Student> getUser();
 
-    public Optional<User> getUserById(int id);
+    public Optional<Student> getUserById(int id);
 
-    public Optional<User> getUserById(String id);
+    public Optional<Student> getUserById(String id);
 
-    public UpdateResult updateUserById(int id, User updated_user);
+    public UpdateResult updateUserById(int id, Student updated_user);
 
     public int getMaxId();
 

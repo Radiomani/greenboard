@@ -1,10 +1,10 @@
 package com.example.service;
 
-import com.example.model.Movie;
+import com.example.model.Course;
 
-public interface MovieService {
+public interface CourseService {
 
-    public Movie getMovieById(int id);
+    public Course getMovieById(int id);
 
     public long count();
 }

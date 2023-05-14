@@ -2,16 +2,16 @@ package com.example.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.model.Movie;
-import com.example.repositories.MovieRepository;
+import com.example.model.Course;
+import com.example.repositories.CourseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
-public class MovieServiceImpl implements MovieService{
+public class CourseServiceImpl implements CourseService{
     
     @Autowired
-    private MovieRepository movieRepository;
+    private CourseRepository movieRepository;
 
     // @Override
     // public String save(Movie movie){
@@ -19,7 +19,7 @@ public class MovieServiceImpl implements MovieService{
     // }
 
     @Override
-    public Movie getMovieById(int id){
+    public Course getMovieById(int id){
         return movieRepository.findMovieByMovieID(id);
     }
 

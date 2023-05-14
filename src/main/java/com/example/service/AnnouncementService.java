@@ -2,12 +2,12 @@ package com.example.service;
 
 import java.util.List;
 
-import com.example.model.Rating;
+import com.example.model.Announcement;
 import com.example.model.Result;
 
-public interface RatingService {
+public interface AnnouncementService {
 
-    String save(Rating rating);
+    String save(Announcement rating);
 
     Result<List<Object>> getMovieRatingGTE(double rating);
 

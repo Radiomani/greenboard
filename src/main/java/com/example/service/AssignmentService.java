@@ -8,8 +8,7 @@ import com.mongodb.client.result.UpdateResult;
 
 public interface AssignmentService {
 
-    String getAssingmentByCourseID(String course_id);
-    String getAssingmentByStudentID(String student_id);
-    List<Assignment> getAssignmentByCourseIDandStudentID(String course_id, String student_id);
-
+    String getAssingmentsByCourseID(String course_id);
+    String getAssingmentsByStudentID(String student_id);
+    List<Assignment> getAssignmentsByCourseIDandStudentID(String course_id, String student_id);
 }

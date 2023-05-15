@@ -35,7 +35,7 @@ public class TaskRepositoryImpl implements TaskRepository {
     }*/
 
     @Override
-    public Task updateTasksByTaskID (String task_id, String new_taskname, String new_description, int new_deadline, String new_priority) {
+    public Task updateTasksByTaskID (String student_id, String task_id, Task task) {
         
         Query query = new Query(Criteria.where("task_id").is(task_id));
 

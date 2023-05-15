@@ -17,6 +17,7 @@ import lombok.Data;
 public class Task{
 
 	@Id
+	private String task_id;
     private String task_name;
 	private String description;
     DateTimeFormatter deadline = DateTimeFormatter.ofPattern("dd-MM-yyyy");

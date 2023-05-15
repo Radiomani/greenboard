@@ -1,5 +1,6 @@
-git clone -b milestone2 https://github.com/Radiomani/greenboard.git
-cd CSE-364_Milestone1_Solution
+git clone https://github.com/Radiomani/greenboard.git
+cd greenboard
+git checkout
 
 #Create User Administrator MongoDB
 mongod --fork --logpath /var/log/mongodb.log
@@ -12,5 +13,6 @@ mongoimport --db=cse364 --collection=courses --authenticationDatabase admin --us
 mongoimport --db=cse364 --collection=students --authenticationDatabase admin --username admin --password password --type=csv --file=data/students.csv --fields=student_id.string\(\),name.string\(\),email.string\(\) --columnsHaveTypes 
 mongoimport --db=cse364 --collection=tasks --authenticationDatabase admin --username admin --password password --type=csv --file=data/tasks.csv --fields=task_id.string\(\),task_name.string\(\),description.string\(\),deadline.int32\(\),priority.string\(\) --columnsHaveTypes 
 
+mvn jacoco:report
 mvn package
 java -jar ./target/cse364-project-1.0-SNAPSHOT.jar

@@ -16,18 +16,36 @@ public class CourseRepositoryImpl implements CourseRepository {
     @Autowired
     MongoTemplate mongoTemplate;
 
+    @Override
+    public boolean isCourseExistByCourseID(String course_id) {
+        Query query = new Query(Criteria.where("course_id").is(course_id));
+
+        Course course = mongoTemplate.findOne(query, Course.class);
+
+        if (course == null) {
+            return false;
+        }
+
+        else {
+            return true;
+        }
+    }
+
+    @Override
     public Course findCourseByCourseID(String course_id) {
         Query query = new Query(Criteria.where("course_id").is(course_id));
         Course result = mongoTemplate.findOne(query, Course.class);
         return result;
     }
 
+    @Override
     public Course findCourseByName(String course_name) {
         Query query = new Query(Criteria.where("course_name").is(course_name));
         Course result = mongoTemplate.findOne(query, Course.class);
         return result;
     }
 
+    @Override
     public long count() {
         return mongoTemplate.count(new Query(), Course.class);
     }

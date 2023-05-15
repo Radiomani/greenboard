@@ -10,8 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.Task;
 import com.example.service.TaskService;
-package com.example.controller;
 
+@RestController
+@RequestMapping("/greenboard/dashboard/task_id")
 public class TaskController {
     
+    @Autowired
+    private TaskService taskService;
+
+
+    @GetMapping("/{task_id}")
+    @ResponseBody
+    public Tasl getTask(@PathVariable("task_id") String task_id) {
+        return taskService.getCourseById(task_id);
+    }
 }

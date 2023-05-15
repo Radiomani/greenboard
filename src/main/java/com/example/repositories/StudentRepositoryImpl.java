@@ -27,13 +27,14 @@ public class StudentRepositoryImpl implements StudentRepository{
     }
 
     @Override
-    public Student updateStudentByID(String student_id, String name, String email) {
+    public Student updateStudentByID(String student_id, String new_student_id, String new_name, String new_email) {
         
         Query query = new Query(Criteria.where("student_id").is(student_id));
 
         Update updateQuery = new Update();
-        updateQuery.set("email", email);
-        updateQuery.set("name", name);
+        updateQuery.set("student_id", new_student_id);
+        updateQuery.set("email", new_email);
+        updateQuery.set("name", new_name);
 
         mongoTemplate.updateFirst(query, updateQuery, Student.class);
 

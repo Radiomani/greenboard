@@ -23,6 +23,21 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
+    public boolean isTaskExistByTaskID(String task_id){
+        Query query = new Query(Criteria.where("task_id").is(task_id));
+
+        Task task = mongoTemplate.findOne(query, Task.class);
+
+        if (task == null) {
+            return false;
+        }
+
+        else {
+            return true;
+        }
+    }
+
+    @Override
     public List<Task> getTasksByStudentID(String student_id) {
         Query query = new Query(Criteria.where("student_id").is(student_id));
         List<Task> tasks_list = mongoTemplate.find(query, Task.class);

@@ -17,7 +17,20 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
     @Autowired
     MongoTemplate mongoTemplate;
 
+    @Override
+    public boolean isAssignmentExistByAssignmentID(String assignment_id){
+        Query query = new Query(Criteria.where("assignment_id").is(assignment_id));
 
+        Assignment assignment = mongoTemplate.findOne(query, Assignment.class);
+
+        if (assignment == null) {
+            return false;
+        }
+
+        else {
+            return true;
+        }
+    }
 
     @Override
     public List<Assignment> getAssignmentsByCourseID(String course_id) {
@@ -26,6 +39,7 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
         return assignments_list;
     }
 
+    @Override
     public Assignment getAssignmentByID(String id) {
         Query query = new Query(Criteria.where("id").is(id));
         Assignment result = mongoTemplate.findOne(query, Assignment.class);

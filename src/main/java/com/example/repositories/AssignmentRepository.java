@@ -11,5 +11,6 @@ public interface AssignmentRepository {
 
     public List<Assignment> getAssignmentsByCourseID(String coruse_id);
     public Assignment getAssignmentByID(String id);
+    public boolean isAssignmentExistByAssignmentID(String assignment_id);
     
 }

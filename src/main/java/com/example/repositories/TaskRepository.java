@@ -9,6 +9,7 @@ import com.example.model.Task;
 
 @Repository
 public interface TaskRepository {
+    public boolean isTaskExistByTaskID(String task_id);
     public List<Task> getTasksByStudentID(String student_id);
     public Task setTask(Task task);
     /*public Task updateTasksByStudentIDandTaskID(String task_id);

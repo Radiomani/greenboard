@@ -7,6 +7,7 @@ import com.example.model.Student;
 
 @Repository
 public interface StudentRepository {
+    public boolean isStudentExistByStudentID(String student_id);
     public Student save(Student student);
     public Student getStudentByID(String student_id);
     public Student updateStudentByID(String student_id, Student student);

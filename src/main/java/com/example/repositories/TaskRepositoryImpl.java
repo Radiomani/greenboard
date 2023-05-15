@@ -41,10 +41,10 @@ public class TaskRepositoryImpl implements TaskRepository {
 
         Update updateQuery = new Update();
 
-        updateQuery.set("task_name", new_taskname);
-        updateQuery.set("description", new_description);
-        updateQuery.set("deadline", new_deadline);
-        updateQuery.set("priority", new_priority);
+        updateQuery.set("task_name", task.getTaskName());
+        updateQuery.set("description", task.getDescription());
+        updateQuery.set("deadline", task.getDeadline());
+        updateQuery.set("priority", task.getPriority());
 
         mongoTemplate.updateFirst(query, updateQuery, Task.class);
 

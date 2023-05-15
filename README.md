@@ -1,9 +1,54 @@
-# Milestone 1
+# Milestone 2
 
-## Tutorial on how to configure the milestone
+## Part I
 
-More details in [HELP.md](./HELP.md)
+we created the milestone2 branch in github to work on the milestone 2
 
+## Part II feature development
+## The description for our features:
+
+Our application includes 3 features: Announcemnent checking, Deadlines checking, Calendar checking
+
+
+## Announcement checking
+
+Announcement will display the announcemenet such as assignment deadlines, or announcement from professor to students.
+
+REST API functionality:
+
+@GetMapping("/{student_id}")
+
+This will retrieve the announcement for a particular student by their student id.
+Curl command:
+- curl -X GET http://localhost:8080/announcements/{student_id}
+Expected output:
+    [
+    {
+        "course_id": "CSE333",
+        "course_name": "HCI",
+        "ann_header" : "Assignment 2",
+	    "ann_description" : "Milestone 1 (docker)",
+	    timestamp: 1684125941
+
+    },
+    {
+        "course_id": "CSE345",
+        "course_name": "Intro to Algorithm",
+        "ann_header" : "Assignment 1",
+	    "ann_description" : ";Red dot tree implementation",
+	    timestamp: 1684165484
+    },
+    ...
+    ]
+ 
+- [x]  curl -X GET http://localhost:8080/announcements/{student_id}/{course_id}
+
+## Deadline checking
+
+This will show the upcoming deadlines of the assignment deadlines
+
+## Calendar checking
+ adding / editting the tasks for each students.
 ## Note for part 2
 
 When testing POST and PUT method, please use the following commands

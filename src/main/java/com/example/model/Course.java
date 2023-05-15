@@ -2,6 +2,7 @@ package com.example.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.querydsl.binding.QuerydslBindings.PathBinder;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -14,21 +15,20 @@ public class Course {
 
 	@Id
 	private String id;
-	private int course_id;
+	private String course_id;
 	private String course_name;
-	private String genre;
+	private String professor_name;
 
-	public Course() {
-    }
-
-	public Course(String course_name, String genre) {
+	public Course(String course_id, String course_name, String professor_name) {
+		this.course_id = course_id;
 		this.course_name = course_name;
-		this.genre = genre;
+		this.professor_name = professor_name;
 	}
 
-    public Course(int course_id, String course_name, String genre) {
-        this.course_id = course_id;
-		this.course_name = course_name;
-		this.genre = genre;
-    }
+	String getCourseID() { return course_id; }
+	String getCourseName() { return course_name; }
+	String getProfessorName() { return professor_name; }
+	void setCourseID(String course_id) { this.course_id = course_id; }
+	void setCourseName(String course_name) { this.course_name = course_name; }
+	void setProfessorName(String professor_name) { this.professor_name = professor_name; } 
 }

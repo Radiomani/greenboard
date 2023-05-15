@@ -14,8 +14,9 @@ public class StudentRepositoryImpl implements StudentRepository{
 
     @Autowired
     MongoTemplate mongoTemplate;
-
-
+    public Student save(Student student) {
+        return mongoTemplate.save(student);
+    }
 
     @Override
     public Student getStudentByID(String student_id) {

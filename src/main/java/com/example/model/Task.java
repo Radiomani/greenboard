@@ -1,9 +1,8 @@
 package com.example.model;
 
-import java.time.LocalDateTime; // Import the LocalDateTime class
-import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
+// import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
+// import com.example.utils.TimeFormat;
 
-import org.hibernate.type.DateType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,15 +19,19 @@ public class Task{
 	private String task_id;
     private String task_name;
 	private String description;
-    DateTimeFormatter deadline = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private int deadline;
 	private String priority;
 
 
 	public Task() {
     }
 
-	public String getTask_name() { return this.task_name; }
+	public String getTaskName() { return this.task_name; }
 	public String getDescription() { return this.description; }
-	public DateTimeFormatter getDeadline() { return this.deadline; }
-	public void setPriority (String prior) { this.priority= prior; }
+	public int getDeadline() { return this.deadline; }
+	public String getPriority() { return this.priority; }
+	public void setTaskName(String task_name) { this.task_name = task_name; }
+	public void setDescription(String description) { this.description = description; }
+	public void setDeadline(int deadline) { this.deadline = deadline; }
+	public void setPriority(String priority) { this.priority = priority; }
 }

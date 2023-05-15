@@ -3,43 +3,40 @@ package com.example.service;
 import org.springframework.stereotype.Service;
 
 import com.example.model.Task;
-import com.example.model.Student;
-import com.example.model.Result;
 import com.example.repositories.TaskRepository;
-import com.example.repositories.StudentRepository;
 
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.aggregation.GroupOperation;
-import org.springframework.data.mongodb.core.aggregation.LookupOperation;
-import org.springframework.data.mongodb.core.aggregation.MatchOperation;
-import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
-import org.springframework.data.mongodb.core.aggregation.ReplaceRootOperation;
-import org.springframework.data.mongodb.core.aggregation.SortOperation;
-import org.springframework.data.mongodb.core.aggregation.UnwindOperation;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.repository.support.Repositories;
+
 @Service
 public class TaskServiceImpl implements TaskService{
     
     @Autowired
-    private StudentRepository studentRepository;
-    @Autowired
     private TaskRepository taskRepository;
 
+    @Override
     public List<Task> getTasksByStudentID(String student_id) {
-        Student student;
+        return taskRepository.getTasksByStudentID(student_id);
     }
 
-    public Optional<Task> getTasksByStudentIDandTaksName(String student_id, String task_name) {
-        
+    @Override
+    public Optional<Task> getTasksByStudentIDandTaskName(String student_id, String task_name) {
+        List<Task> tasks = taskRepository.getTasksByStudentID(student_id);
+        Task task = new Task();
+        boolean found = false;
+        for (Task t : tasks) {
+            if (task_name == t.getTaskName()) {
+                task = t;
+                found = true;
+            }
+        }
+        if (found) return Optional.of(task);
+        else return Optional.empty(); 
     }
-    public String setTaskByStudentID(String student_id, Task task);
-    public String deleteTaksByStudentIDandTaskName(String student_id, String task_name);   
+
+    /*public Optional<Task> getTasksByStudentIDandTaksName(String student_id, String task_name) {
+        
+    }*/
 }

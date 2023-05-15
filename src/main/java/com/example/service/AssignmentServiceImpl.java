@@ -28,7 +28,7 @@ public class AssignmentServiceImpl implements AssignmentService{
     private StudentRepository studentRepository;
 
     public List<Assignment> getAssignmentsByStudentID(String student_id){
-        Student student = studentRepository.getStudentByID();
+        Student student = studentRepository.getStudentByID(student_id);
         List<String> courses = student.getCoursesTaken();
         List<Assignment> ass = new ArrayList<>();
         for (String course : courses) {
@@ -50,7 +50,7 @@ public class AssignmentServiceImpl implements AssignmentService{
         //List<String> courses = student.getCoursesTaken();
         List<Assignment> asses =  assignmentRepository.getAssignmentsByCourseID(course_id);
         boolean found = false;
-        Assignment ass;
+        Assignment ass = new Assignment();
         for (Assignment a: asses) {
             if (assingment_id == a.getAssignmentID()) {
                 ass = a;

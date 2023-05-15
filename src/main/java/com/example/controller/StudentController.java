@@ -65,7 +65,7 @@ public class StudentController {
     
     
 
-    @PutMapping("/students/registration/{student_id}")
+    /* @PutMapping("/students/registration/{student_id}")
     public ResponseEntity<Optional<Student>>
     updateStudent(@PathVariable("student_id") String id, @RequestBody Student student) {
         if(id.length() == 0) {
@@ -91,5 +91,5 @@ public class StudentController {
         } catch(NumberFormatException e) {
             throw new ParameterErrorStringException("Parameter is not a number!");
         }
-    } 
+    }*/
 }

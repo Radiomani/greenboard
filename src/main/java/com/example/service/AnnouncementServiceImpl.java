@@ -30,7 +30,7 @@ public class AnnouncementServiceImpl implements AnnouncementService{
 
     @Override
     public List<Announcement> getAnnouncementsByStudentID(String student_id) {
-        Student student = studentRepository.getStudentByID();
+        Student student = studentRepository.getStudentByID(student_id);
         List<String> courses = student.getCoursesTaken();
         List<Announcement> anns = new ArrayList<>();
         for (String course : courses) {

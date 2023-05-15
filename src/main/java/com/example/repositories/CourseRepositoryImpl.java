@@ -16,7 +16,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     @Autowired
     MongoTemplate mongoTemplate;
 
-    public Course findCourseByCourseID(int course_id) {
+    public Course findCourseByCourseID(String course_id) {
         Query query = new Query(Criteria.where("course_id").is(course_id));
         Course result = mongoTemplate.findOne(query, Course.class);
         return result;

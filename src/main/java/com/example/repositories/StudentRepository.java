@@ -7,6 +7,7 @@ import com.example.model.Student;
 
 @Repository
 public interface StudentRepository {
-    Student getStudentByID(String student_id);
+    public Student save(Student student);
+    public Student getStudentByID(String student_id);
 }
 

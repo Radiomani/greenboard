@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 @Data
-@Document(collection = "task")
+@Document(collection = "tasks")
 @JsonInclude(JsonInclude.Include.NON_NULL) //include only non_null values
 public class Task{
 
@@ -29,5 +29,5 @@ public class Task{
 	public String getTask_name() { return this.task_name; }
 	public String getDescription() { return this.description; }
 	public DateTimeFormatter getDeadline() { return this.deadline; }
-	public void setPriority (String prior) { this.priority= prior }
+	public void setPriority (String prior) { this.priority= prior; }
 }

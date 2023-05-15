@@ -14,37 +14,22 @@ public class Assignment {
 
 	@Id
 	private String id;
-	private int assignment_id;
-	private String gender;
-	private int age;
-	private int occupation;
-	private String zip_code;
-
+	private String assignment_id;
+	private int deadline;
+	private String course_id;
+	private String course_name;
 	// Assignment_id,gender,age,occupation,zip_code
 
 	public Assignment() {
     }
 
-	// public Assignment(String gender, int age, int occupation, String zip_code) {
-    //     this.gender = gender;
-	// 	this.age = age;
-	// 	this.occupation = occupation;
-	// 	this.zip_code = zip_code;
-    // }
+	public String getAssignmentID() { return this.assignment_id; }
+	public int getDeadline() { return this.deadline; }
+	public String getCourseID() { return this.course_id; }
+	public String getCourseName() { return this.course_name; }
 
-    // public Assignment(int Assignment_id, String gender, int age, int occupation, String zip_code) {
-	// 	this.Assignment_id = Assignment_id;
-    //     this.gender = gender;
-	// 	this.age = age;
-	// 	this.occupation = occupation;
-	// 	this.zip_code = zip_code;
-    // }
-
-	public int getAssignment_id() { return this.assignment_id; }
-	public String getGender() { return this.gender; }
-	public int getAge() { return this.age; }
-	public int getOccupation() { return this.occupation; }
-	public String getZip_code() { return this.zip_code; }
-
-	public void setAssignmentId(int id) { this.assignment_id = id; }
+	public void setAssignmentId(String id) { this.assignment_id = id; }
+	public void setDeadline(int deadline) { this.deadline = deadline; }
+	public void setCourseID(String course_id) { this.course_id = course_id; }
+	public void setCourseName(String course_id) { this.course_name = course_id; }
 }

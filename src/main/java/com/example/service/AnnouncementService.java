@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.model.Announcement;
 
 public interface AnnouncementService {
-    List<Announcement> getAnnouncementsByCourseID(String course_id);
-    List<Announcement> getAnnouncementsByStudentID(String student_id);
-    List<Announcement> getAnnouncementsByCourseIDandUserID(String student_id, String course);    
+    public List<Announcement> getAnnouncementsByCourseID(String course_id);
+    public List<Announcement> getAnnouncementsByStudentID(String student_id);
+    public List<Announcement> getAnnouncementsByCourseIDandStudentID(String student_id, String course);    
 }

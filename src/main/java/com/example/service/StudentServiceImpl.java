@@ -21,49 +21,14 @@ public class StudentServiceImpl implements StudentService{
     
     @Autowired
     private StudentRepository studentRepository;
-    @Autowired
-    private MongoTemplate mongoTemplate;
 
     @Override
     public String save(Student student){
-        student.setStudentId(getMaxId() + 1);
         return studentRepository.save(student).getId();
     }
 
     @Override
-    public List<Student> getStudent(){
-        return studentRepository.findAll();
-    }
-
-    @Override
-    public Optional<Student> getStudentById(int id) {
-        Query query = new Query(Criteria.where("student_id").is(id));
-        Student student = mongoTemplate.findOne(query, Student.class);
-        if(student == null) {
-            return Optional.empty();
-        }
-        return Optional.of(student);
-    }
-
-    @Override
-    public Optional<Student> getStudentById(String id) {
-        return studentRepository.findById(id);
-    }
-
-    @Override
-    public UpdateResult updateStudentById(int id, Student updated_student) {
-        Query query = new Query(Criteria.where("student_id").is(id));
-        Update update = new Update()
-        .set("name", updated_student.getName())
-        .set("email", updated_student.getEmail());
-        UpdateResult result = mongoTemplate.updateFirst(query, update, Student.class);
-        return result;
-    }
-
-    @Override
-    public int getMaxId() {
-        Query query = new Query();
-        query.limit(1).with(Sort.by(Sort.Direction.DESC, "student_id"));
-        return mongoTemplate.find(query, Student.class).get(0).getStudent_id();
+    public Optional<Student> getStudentByStudentID(String student_id) {
+        return studentRepository.getStudentByID(student_id);
     }
 }

@@ -1,7 +1,9 @@
 package com.example.controller;
 
 import java.util.Optional;
+import java.util.List;
 
+// import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,7 @@ import com.example.service.AssignmentService;
 import com.mongodb.client.result.UpdateResult;
 
 @RestController
-@RequestMapping("/dashboard/assignments")
+@RequestMapping("/dashboard/deadlines")
 public class AssignmentController {
 
     @Autowired
@@ -46,7 +48,7 @@ public class AssignmentController {
                              .body("Parameter is not a number!");
     }
 
-    @PostMapping
+    /* @PostMapping
     public void subtmitAssignment(@RequestBody Assignment assignment ) {
         String new_id = assignmentService.subtmitAssignment(assignment);
         Optional<Assignment> new_assignment = assignmentService.getAssignmentById(new_id);
@@ -54,17 +56,27 @@ public class AssignmentController {
             throw new ObjectIdException("Something wrong when saving the assignment!");
         } 
         return ResponseEntity.ok(new_assignment.get());
+    } */
+
+    @GetMapping("/{student_id}")
+    public ResponseEntity<List<Assignment>>
+    getAssignmentsByStudentID(@PathVariable("student_id") String student_id) {
+        return ResponseEntity.ok(assignmentService.getAssignmentsByStudentID(student_id));
+    }
+    
+    @GetMapping("/{student_id}/{course_id}")
+    public ResponseEntity<List<Assignment>>
+    getAssignmentsByStudentID(@PathVariable("student_id") String student_id, @PathVariable("course_id") String course_id) {
+        return ResponseEntity.ok(assignmentService.getAssignmentsByStudentIDandCourseID(student_id, course_id));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Assignment>> getAssignment(@PathVariable("id") String id) {
-       
-            return ResponseEntity.ok(assignmentService.getAssignmentById(id));
-           
+    @GetMapping("/{student_id}/{course_id}/{assignment_id}")
+    public ResponseEntity<Optional<Assignment>>
+    getAssignmentsByStudentID(@PathVariable("student_id") String student_id, @PathVariable("course_id") String course_id, @PathVariable("assignment_id") String assignment_id) {
+        return ResponseEntity.ok(assignmentService.getAssignmentByStudentIDandCourseIDandByAssingmentID(student_id, course_id, assignment_id));
     }
-   
 
-    @PutMapping("/{id}")
+    /* @PutMapping("/{id}")
     public ResponseEntity<Assignment> updateAssignment(@PathVariable("id") String id, @RequestBody Assignment assignment) {
         if(id.length() == 0) {
             throw new ParameterErrorStringException("Parameter is not a number!");
@@ -82,5 +94,5 @@ public class AssignmentController {
         } catch(NumberFormatException e) {
             throw new ParameterErrorStringException("Parameter is not a number!");
         }
-    }
+    } */
 }

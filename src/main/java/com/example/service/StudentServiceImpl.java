@@ -28,7 +28,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public Optional<Student> getStudentByStudentID(String student_id) {
-        return studentRepository.getStudentByID(student_id);
+    public Optional<Student> getStudentByID(String student_id) {
+        return Optional.of(studentRepository.getStudentByID(student_id));
     }
 }

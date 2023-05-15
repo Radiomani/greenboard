@@ -27,7 +27,7 @@ public class AssignmentServiceImpl implements AssignmentService{
     @Autowired
     private StudentRepository studentRepository;
 
-    public List<Assignment> getAssingmentsByStudentID(String student_id){
+    public List<Assignment> getAssignmentsByStudentID(String student_id){
         Student student = studentRepository.getStudentByID();
         List<String> courses = student.getCoursesTaken();
         List<Assignment> ass = new ArrayList<>();
@@ -38,14 +38,14 @@ public class AssignmentServiceImpl implements AssignmentService{
     }
 
     @Override
-    public List<Assignment> getAssignmentsByCourseID(String course_id, String student_id) {
+    public List<Assignment> getAssignmentsByStudentIDandCourseID(String student_id, String course_id) {
         //Student student = studentRepository.getStudentByID();
         //List<String> courses = student.getCoursesTaken();
         return assignmentRepository.getAssignmentsByCourseID(course_id);
     }
 
     @Override
-    public Optional<Assignment> getAssignmentByCourseIDandStudentIDandByAssingmentID(String course_id, String student_id, String assingment_id) {
+    public Optional<Assignment> getAssignmentByStudentIDandCourseIDandByAssingmentID(String student_id, String course_id, String assingment_id) {
         //Student student = studentRepository.getStudentByID();
         //List<String> courses = student.getCoursesTaken();
         List<Assignment> asses =  assignmentRepository.getAssignmentsByCourseID(course_id);

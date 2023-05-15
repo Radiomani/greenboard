@@ -1,5 +1,11 @@
 package com.example.controller;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.swing.text.html.Option;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +18,7 @@ import com.example.model.Course;
 import com.example.service.CourseService;
 
 @RestController
-@RequestMapping("greenboard/dashboard/courses")
+@RequestMapping("greenboard/courses")
 public class CourseController {
 
     @Autowired
@@ -23,9 +29,17 @@ public class CourseController {
     //     return courseService.save(course);
     // }
 
-    @GetMapping("/{course_id}")
+    @GetMapping("/{student_id}")
     @ResponseBody
-    public Course getcourse(@PathVariable("course") String course_id) {
-        return courseService.getCourseById(course_id);
+    public ResponseEntity<List<Course>>
+    getCoursesByStudentID(@PathVariable("student_id") String student_id) {
+        return ResponseEntity.ok(courseService.getCoursesByStudentID(student_id));
+    }
+
+    @GetMapping("/{student_id}/{course_id}")
+    @ResponseBody
+    public ResponseEntity<Optional<Course>>
+    getCoursesByStudentID(@PathVariable("student_id") String student_id, @PathVariable("course_id") String course_id) {
+        return ResponseEntity.ok(courseService.getCourseByCourseID(course_id));
     }
 }

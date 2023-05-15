@@ -21,7 +21,7 @@ import com.example.model.Result;
 import com.example.service.AnnouncementService;
 
 @RestController
-@RequestMapping("/announcement")
+@RequestMapping("/announcements")
 public class AnnouncementController {
 
     @Autowired
@@ -39,12 +39,17 @@ public class AnnouncementController {
                              .body("Parameter is not a number!");
     }
 
-
-    @GetMapping("/ID")
+    @GetMapping("/{student_id}")
     @ResponseBody
-    public ResponseEntity<List<Announcement>> getAnnouncementByUserID(@PathVariable("ID") String id) {
-            return ResponseEntity.ok(announcementService.getAnnouncementsByUserID(id));
-        
+    public ResponseEntity<List<Announcement>>
+    getAnnouncementsByStudentID(@PathVariable("student_id") String student_id) {
+        return ResponseEntity.ok(announcementService.getAnnouncementsByStudentID(student_id));
     }
-    
+
+    @GetMapping("/{student_id}/{course_id}")
+    @ResponseBody
+    public ResponseEntity<List<Announcement>>
+    getAnnouncementsByCourseIDandStudentID(@PathVariable("student_id") String student_id, @PathVariable("course_id") String course_id) {
+        return ResponseEntity.ok(announcementService.getAnnouncementsByCourseIDandStudentID(student_id, course_id));
+    }
 }

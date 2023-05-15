@@ -47,39 +47,42 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> savestudent(@RequestBody Student student) {
+    public ResponseEntity<Student>
+    saveStudent(@RequestBody Student student) {
         String new_id = studentService.save(student);
-        Optional<Student> new_student = studentService.getStudentById(new_id);
+        Optional<Student> new_student = studentService.getStudentByID(new_id);
         if(new_student == null) {
             throw new ObjectIdException("Something wrong when saving the student!");
         } 
         return ResponseEntity.ok(new_student.get());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Student>> getStudent(@PathVariable("id") String id) {
-       
-                return ResponseEntity.ok(studentService.getStudentById(id));
-            
+    @GetMapping("/{student_id}")
+    public ResponseEntity<Optional<Student>>
+    getStudent(@PathVariable("student_id") String id) {
+        return ResponseEntity.ok(studentService.getStudentByID(id));
     }
+    
+    
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable("id") String id, @RequestBody Student student) {
+    /* @PutMapping("/{student_id}")
+    public ResponseEntity<Optional<Student>>
+    updateStudent(@PathVariable("student_id") String id, @RequestBody Student student) {
         if(id.length() == 0) {
             throw new ParameterErrorStringException("Parameter is not a number!");
         }
         try {
             int student_id = Integer.parseInt(id);
-            UpdateResult result = studentService.updateStudentById(student_id, student);
+            UpdateResult result = studentService.updateStudentByID(student_id, student);
             if(result.getMatchedCount() == 0) {
                 throw new ParameterErrorNumberException("student id does not exist!");
             }
             if(!result.wasAcknowledged()) {
                 throw new ObjectIdException("Something wrong when saving the student!");
             }
-            return ResponseEntity.ok(studentService.getStudentById(student_id).get());
+            return ResponseEntity.ok(studentService.getStudentByID(student_id).get());
         } catch(NumberFormatException e) {
             throw new ParameterErrorStringException("Parameter is not a number!");
         }
-    }
+    } */
 }

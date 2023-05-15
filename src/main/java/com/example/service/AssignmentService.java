@@ -7,7 +7,7 @@ import java.util.Optional;
 import com.example.model.Assignment;
 
 public interface AssignmentService {
-    public List<Assignment> getAssingmentsByStudentID(String student_id);
-    public List<Assignment> getAssignmentsByCourseIDandStudentID(String course_id, String student_id);
-    public Optional<Assignment> getAssignmentByCourseIDandStudentIDandByAssingmentID(String course_id, String student_id, String assingment_id);
+    public List<Assignment> getAssignmentsByStudentID(String student_id);
+    public List<Assignment> getAssignmentsByStudentIDandCourseID(String student_id, String course_id);
+    public Optional<Assignment> getAssignmentByStudentIDandCourseIDandByAssingmentID(String student_id, String course_id, String assingment_id);
 }

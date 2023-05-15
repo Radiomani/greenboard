@@ -1,11 +1,15 @@
 package com.example.repositories;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.example.model.Assignment;
 
+
 @Repository
-public interface AssignmentRepository extends MongoRepository<Assignment, String> {
-    Assignment findById();
+public interface AssignmentRepository {
+
+    public List<Assignment> getAssignmentsByCourseID(String coruse_id);
+    public Assignment getAssignmentByID(String id);
+    
 }

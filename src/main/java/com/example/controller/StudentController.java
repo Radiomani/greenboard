@@ -61,9 +61,7 @@ public class StudentController {
     public ResponseEntity<Optional<Student>>
     getStudent(@PathVariable("student_id") String id) {
         return ResponseEntity.ok(studentService.getStudentByID(id));
-    }
-    
-    
+    }    
 
     /* @PutMapping("/students/registration/{student_id}")
     public ResponseEntity<Optional<Student>>

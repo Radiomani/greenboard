@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-// import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
-
 
 import com.example.model.Announcement;
 
@@ -16,8 +14,6 @@ import com.example.model.Announcement;
 public class AnnouncementRepositoryImpl implements AnnouncementRepository {
     @Autowired
     MongoTemplate mongoTemplate;
-
-
 
     @Override
     public List<Announcement> getAnnouncementsByCourseID(String course_id) {

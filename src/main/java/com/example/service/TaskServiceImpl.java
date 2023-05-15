@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.support.TaskUtils;
 
 @Service
 public class TaskServiceImpl implements TaskService{
@@ -22,12 +23,12 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public Optional<Task> getTasksByStudentIDandTaskName(String student_id, String task_name) {
+    public Optional<Task> getTaskByStudentIDandTaskID(String student_id, String task_id) {
         List<Task> tasks = taskRepository.getTasksByStudentID(student_id);
         Task task = new Task();
         boolean found = false;
         for (Task t : tasks) {
-            if (task_name == t.getTaskName()) {
+            if (task_id == t.getTaskName()) {
                 task = t;
                 found = true;
             }
@@ -36,7 +37,16 @@ public class TaskServiceImpl implements TaskService{
         else return Optional.empty(); 
     }
 
-    /*public Optional<Task> getTasksByStudentIDandTaksName(String student_id, String task_name) {
-        
-    }*/
+    public Optional<Task> setTaskByStudentID(String student_id, Task task) {
+        task.setStudentID(student_id);
+        return taskRepository.setTask(task);
+    }
+
+    public Optional<Task> updateTasksByStudentIDandTaskID(String student_id, String task_id, Task task) {
+        return taskRepository.updateTaskByStudentIDandTaskID(student_id, task_id, task);
+    }
+
+    public String deleteTaskByStudentIDandTaskID(String student_id, String task_id) {
+        return deleteTaskByStudentIDandTaskID(student_id, task_id);
+    }   
 }

@@ -16,20 +16,23 @@ import lombok.Data;
 public class Task{
 
 	@Id
+	private String id;
+	private String student_id;
 	private String task_id;
     private String task_name;
 	private String description;
     private int deadline;
 	private String priority;
 
-
 	public Task() {
     }
 
+	public String getStudentID() { return this.student_id; }
 	public String getTaskName() { return this.task_name; }
 	public String getDescription() { return this.description; }
 	public int getDeadline() { return this.deadline; }
 	public String getPriority() { return this.priority; }
+	public void setStudentID (String student_id) {this.student_id = student_id; }
 	public void setTaskName(String task_name) { this.task_name = task_name; }
 	public void setDescription(String description) { this.description = description; }
 	public void setDeadline(int deadline) { this.deadline = deadline; }

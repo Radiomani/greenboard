@@ -20,7 +20,7 @@ public class StudentRepositoryImpl implements StudentRepository{
     }
 
     @Override
-    public boolean isStudentExistByStudentID(String student_id){
+    public boolean isStudentExist(String student_id){
         Query query = new Query(Criteria.where("student_id").is(student_id));
 
         Student student = mongoTemplate.findOne(query, Student.class);

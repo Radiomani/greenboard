@@ -43,7 +43,8 @@ public class AnnouncementController {
     @ResponseBody
     public ResponseEntity<List<Announcement>>
     getAnnouncementsByStudentID(@PathVariable("student_id") String student_id) {
-        return ResponseEntity.ok(announcementService.getAnnouncementsByStudentID(student_id));
+        result(announcementService.getAnnouncementsByStudentID(student_id));
+        return ResponseEntity.ok();
     }
 
     @GetMapping("/{student_id}/{course_id}")

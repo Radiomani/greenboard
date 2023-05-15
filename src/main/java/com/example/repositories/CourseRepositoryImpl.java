@@ -17,7 +17,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     MongoTemplate mongoTemplate;
 
     @Override
-    public boolean isCourseExistByCourseID(String course_id) {
+    public boolean isCourseExist(String course_id) {
         Query query = new Query(Criteria.where("course_id").is(course_id));
 
         Course course = mongoTemplate.findOne(query, Course.class);

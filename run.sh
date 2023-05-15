@@ -1,6 +1,6 @@
 git clone https://github.com/Radiomani/greenboard.git
 cd greenboard
-git checkout
+git checkout milestone2
 
 #Create User Administrator MongoDB
 mongod --fork --logpath /var/log/mongodb.log

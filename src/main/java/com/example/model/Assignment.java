@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 @Data
-@Document(collection = "assignment")
+@Document(collection = "assignments")
 @JsonInclude(JsonInclude.Include.NON_NULL) //include only non_null values
 public class Assignment {
 

@@ -31,4 +31,10 @@ public class StudentServiceImpl implements StudentService{
     public Optional<Student> getStudentByID(String student_id) {
         return Optional.of(studentRepository.getStudentByID(student_id));
     }
+
+    /* @Override
+    public Result<String> updateStudentByID(String student_id, Student new_student) {
+        return ;
+    } */
+
 }

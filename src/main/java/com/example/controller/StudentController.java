@@ -65,24 +65,31 @@ public class StudentController {
     
     
 
-    /* @PutMapping("/{student_id}")
+    @PutMapping("/students/registration/{student_id}")
     public ResponseEntity<Optional<Student>>
     updateStudent(@PathVariable("student_id") String id, @RequestBody Student student) {
         if(id.length() == 0) {
-            throw new ParameterErrorStringException("Parameter is not a number!");
+            throw new ParameterErrorStringException("Id is invalid!");
         }
         try {
-            int student_id = Integer.parseInt(id);
-            UpdateResult result = studentService.updateStudentByID(student_id, student);
+            // int student_id = Integer.parseInt(id);
+            UpdateResult result = studentService.updateStudentByID(id, student);
             if(result.getMatchedCount() == 0) {
                 throw new ParameterErrorNumberException("student id does not exist!");
             }
             if(!result.wasAcknowledged()) {
                 throw new ObjectIdException("Something wrong when saving the student!");
             }
-            return ResponseEntity.ok(studentService.getStudentByID(student_id).get());
+            // return ResponseEntity.ok(studentService.getStudentByID(id).get());
+            Optional<Student> optionalStudent = studentService.getStudentByID(id);
+            if (optionalStudent.isPresent()) {
+                // Student student_obj = optionalStudent.get();
+                return ResponseEntity.ok(optionalStudent);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         } catch(NumberFormatException e) {
             throw new ParameterErrorStringException("Parameter is not a number!");
         }
-    } */
+    } 
 }

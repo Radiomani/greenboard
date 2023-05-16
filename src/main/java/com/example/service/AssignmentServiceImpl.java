@@ -2,22 +2,18 @@ package com.example.service;
 
 import org.springframework.stereotype.Service;
 
+import com.example.model.Result;
 import com.example.model.Student;
 import com.example.model.Assignment;
 import com.example.repositories.AssignmentRepository;
+import com.example.repositories.CourseRepository;
 import com.example.repositories.StudentRepository;
-import com.mongodb.client.result.UpdateResult;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
+// import org.springframework.data.domain.Sort;
 
 @Service
 public class AssignmentServiceImpl implements AssignmentService{
@@ -26,42 +22,82 @@ public class AssignmentServiceImpl implements AssignmentService{
     private AssignmentRepository assignmentRepository;
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private CourseRepository courseRepository;
 
-    public List<Assignment> getAssignmentsByStudentID(String student_id){
-        Student student = studentRepository.getStudentByID(student_id);
-        List<String> courses = student.getCoursesTaken();
-        List<Assignment> ass = new ArrayList<>();
-        for (String course : courses) {
-            ass.addAll(assignmentRepository.getAssignmentsByCourseID(course));
-        }
-        return ass;
-    }
-
-    @Override
-    public List<Assignment> getAssignmentsByStudentIDandCourseID(String student_id, String course_id) {
-        //Student student = studentRepository.getStudentByID();
-        //List<String> courses = student.getCoursesTaken();
-        return assignmentRepository.getAssignmentsByCourseID(course_id);
-    }
-
-    @Override
-    public Optional<Assignment> getAssignmentByStudentIDandCourseIDandByAssingmentID(String student_id, String course_id, String assingment_id) {
-        //Student student = studentRepository.getStudentByID();
-        //List<String> courses = student.getCoursesTaken();
-        List<Assignment> asses =  assignmentRepository.getAssignmentsByCourseID(course_id);
-        boolean found = false;
-        Assignment ass = new Assignment();
-        for (Assignment a: asses) {
-            if (assingment_id == a.getAssignmentID()) {
-                ass = a;
-                found = true;
-                break;
+    public Result<List<Assignment>> getAssignmentsByStudentID(String student_id){
+        if (studentRepository.isStudentExist(student_id)) {
+            Student student = studentRepository.getStudentByID(student_id);
+            List<String> courses = student.getCoursesTaken();
+            List<Assignment> ass = new ArrayList<>();
+            for (String course : courses) {
+                ass.addAll(assignmentRepository.getAssignmentsByCourseID(course));
             }
+            return new Result<>(ass);
+        } else {
+            Result<List<Assignment>> result = new Result<>();
+            result.notStudent();
+            return result;
         }
-        if (found) return Optional.of(ass);
-        else return Optional.empty();
     }
 
+    @Override
+    public Result<List<Assignment>> getAssignmentsByStudentIDandCourseID(String student_id, String course_id) {
+        Result<List<Assignment>> result = new Result<>();
+        if (studentRepository.isStudentExist(student_id)) {
+            if (courseRepository.isCourseExist(course_id)) {
+                Student student = studentRepository.getStudentByID(student_id);
+                if (student.getCoursesTaken().contains(course_id)) {
+                    return new Result<>(assignmentRepository.getAssignmentsByCourseID(course_id));
+                } else {
+                    result.noCourseAccess();
+                    return result;
+                }
+            } else {
+                result.notCourse();
+                return result;
+            }
+        } else {
+            result.notStudent();
+            return result;             
+        } 
+    }
+
+    @Override
+    public Result<Assignment> getAssignmentByStudentIDandCourseIDandByAssingmentID(String student_id, String course_id, String assingment_id) {
+        Result<Assignment> result = new Result<>();
+        if (studentRepository.isStudentExist(student_id)) {
+            if (courseRepository.isCourseExist(course_id)) {
+                Student student = studentRepository.getStudentByID(student_id);
+                if (student.getCoursesTaken().contains(course_id)) {
+                    List<Assignment> asses =  assignmentRepository.getAssignmentsByCourseID(course_id);
+                    boolean found = false;
+                    Assignment ass = new Assignment();
+                    for (Assignment a: asses) {
+                        if (assingment_id == a.getAssignmentID()) {
+                            ass = a;
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) return new Result<>(ass);
+                    else {
+                        result.notAssignment();
+                        return result;
+                    }
+                } else {
+                    result.noCourseAccess();
+                    return result;
+                }
+            } else {
+                result.notCourse();
+                return result;
+            }
+        } else {
+            result.notStudent();
+            return result;             
+        } 
+    }
 
     /* 
     

@@ -25,7 +25,7 @@ public class AnnouncementServiceImpl implements AnnouncementService{
     @Autowired
     private CourseRepository courseRepository;
 
-    @Override
+    /* @Override
     public Result<List<Announcement>>
     getAnnouncementsByCourseID(String course_id) {
         if (courseRepository.isCourseExist(course_id))
@@ -37,7 +37,7 @@ public class AnnouncementServiceImpl implements AnnouncementService{
             result.notCourse();
             return result;
         }   
-    }
+    } */
 
     @Override
     public Result<List<Announcement>>
@@ -61,23 +61,21 @@ public class AnnouncementServiceImpl implements AnnouncementService{
     @Override
     public Result<List<Announcement>>
     getAnnouncementsByCourseIDandStudentID(String student_id, String course_id) {
+        Result<List<Announcement>> result = new Result<>();
         if (studentRepository.isStudentExist(student_id)) {
             if (courseRepository.isCourseExist(course_id)) {
                 Student student = studentRepository.getStudentByID(student_id);
                 if (student.getCoursesTaken().contains(course_id)) {
                     return new Result<>(announcementRepository.getAnnouncementsByCourseID(course_id));
                 } else {
-                    Result<List<Announcement>> result = new Result<>();
                     result.noCourseAccess();
                     return result;
                 }
             } else {
-                Result<List<Announcement>> result = new Result<>();
                 result.notCourse();
                 return result;
             }
         } else {
-            Result<List<Announcement>> result = new Result<>();
             result.notStudent();
             return result;
         }

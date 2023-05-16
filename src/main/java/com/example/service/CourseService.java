@@ -1,11 +1,11 @@
 package com.example.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.example.model.Course;
+import com.example.model.Result;
 
 public interface CourseService {
-    public Optional<Course> getCourseByCourseID(String course_id);
-    public List<Course> getCoursesByStudentID(String student_id);
+    public Result<List<Course>> getCoursesByStudentID(String student_id);
+    public Result<Course> getCourseByStudentIDandCourseID(String student_id, String course_id);
 }

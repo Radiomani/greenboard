@@ -27,11 +27,13 @@ public class Task{
 	public Task() {
     }
 
+	public String getTaskID() { return this.task_id;}
 	public String getStudentID() { return this.student_id; }
 	public String getTaskName() { return this.task_name; }
 	public String getDescription() { return this.description; }
 	public int getDeadline() { return this.deadline; }
 	public String getPriority() { return this.priority; }
+	public void setTaskID(String task_id) { this.task_id = task_id; }
 	public void setStudentID (String student_id) {this.student_id = student_id; }
 	public void setTaskName(String task_name) { this.task_name = task_name; }
 	public void setDescription(String description) { this.description = description; }

@@ -10,7 +10,7 @@ mongosh admin --eval "db.createUser({ user: 'admin', pwd: 'password', roles: ['u
 mongoimport --db=cse364 --collection=announcements --authenticationDatabase admin --username admin --password password --type=csv --file=data/announcements.csv --fields=couse_id.string\(\),course_name.string\(\),ann_header.string\(\),ann_description.string\(\),timestamp.int32\(\) --columnsHaveTypes 
 mongoimport --db=cse364 --collection=assignments --authenticationDatabase admin --username admin --password password --type=csv --file=data/assignments.csv --fields=assignment_id.string\(\),deadline.int32\(\),course_id.string\(\),course_name.string\(\) --columnsHaveTypes 
 mongoimport --db=cse364 --collection=courses --authenticationDatabase admin --username admin --password password --type=csv --file=data/courses.csv --fields=course_id.string\(\),course_name.string\(\),professor_name.string\(\) --columnsHaveTypes 
-mongoimport --db=cse364 --collection=students --authenticationDatabase admin --username admin --password password --type=csv --file=data/students.csv --fields=student_id.string\(\),name.string\(\),email.string\(\) --columnsHaveTypes 
+mongoimport --db=cse364 --collection=students --authenticationDatabase admin --username admin --password password --type=csv --file=data/students.csv --fields=student_id.string\(\),name.string\(\),email.string\(\),courses_taken.array\(string\(\)\), --columnsHaveTypes 
 mongoimport --db=cse364 --collection=tasks --authenticationDatabase admin --username admin --password password --type=csv --file=data/tasks.csv --fields=task_id.string\(\),task_name.string\(\),description.string\(\),deadline.int32\(\),priority.string\(\) --columnsHaveTypes 
 
 mvn jacoco:report

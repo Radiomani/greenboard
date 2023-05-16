@@ -1,7 +1,5 @@
 package com.example.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,16 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+//import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.exception.ObjectIdException;
-import com.example.exception.ParameterErrorNumberException;
-import com.example.exception.ParameterErrorStringException;
+import com.example.exception.ResponseException;
 import com.example.model.Student;
+import com.example.model.Result;
 import com.example.service.StudentService;
-import com.mongodb.client.result.UpdateResult;
 
 @RestController
 @RequestMapping("/students")
@@ -28,66 +25,48 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @ExceptionHandler(ObjectIdException.class)
-    public ResponseEntity<String> handleObjectIdException() {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                             .body("Something wrong when saving the student");
-    }
-
-    @ExceptionHandler(ParameterErrorNumberException.class)
-    public ResponseEntity<String> handleParameterErrorNumber() {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                             .body("student id does not exist!");
-    }
-
-    @ExceptionHandler(ParameterErrorStringException.class)
-    public ResponseEntity<String> handleParameterErrorString() {
-        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
-                             .body("Parameter is not a number!");
+    @ExceptionHandler(ResponseException.class)
+    public ResponseEntity<String> handleObjectIdException(ResponseException ex) {
+        return ResponseEntity.status(ex.getStatus())
+                             .body(ex.getMessage());
     }
 
     @PostMapping
     public ResponseEntity<Student>
     saveStudent(@RequestBody Student student) {
-        String new_id = studentService.save(student);
-        Optional<Student> new_student = studentService.getStudentByID(new_id);
-        if(new_student == null) {
-            throw new ObjectIdException("Something wrong when saving the student!");
-        } 
-        return ResponseEntity.ok(new_student.get());
+        Result<Student> result = studentService.save(student);
+        if (result.isSafe()) {
+            return ResponseEntity.ok(result.getResult());
+        } else if (!result.saveSuccess()) {
+            throw new ResponseException("Saving student failed!!!", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/{student_id}")
-    public ResponseEntity<Optional<Student>>
+    public ResponseEntity<Student>
     getStudent(@PathVariable("student_id") String id) {
-        return ResponseEntity.ok(studentService.getStudentByID(id));
+        Result<Student> result = studentService.getStudentByID(id);
+        if (result.isSafe()) {
+            return ResponseEntity.ok(result.getResult());
+        } else if (!result.isStudent()) {
+            throw new ResponseException("Student does NOT exist!!!", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }    
 
-    /* @PutMapping("/students/registration/{student_id}")
-    public ResponseEntity<Optional<Student>>
+    @PutMapping("/update/{student_id}")
+    public ResponseEntity<Student>
     updateStudent(@PathVariable("student_id") String id, @RequestBody Student student) {
-        if(id.length() == 0) {
-            throw new ParameterErrorStringException("Id is invalid!");
+        Result<Student> result = studentService.updateStudentByID(id, student);
+        if (result.isSafe()) {
+            return ResponseEntity.ok(result.getResult());
+        } else if (!result.isStudent()) {
+            throw new ResponseException("Student does NOT exist!!!", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        try {
-            // int student_id = Integer.parseInt(id);
-            UpdateResult result = studentService.updateStudentByID(id, student);
-            if(result.getMatchedCount() == 0) {
-                throw new ParameterErrorNumberException("student id does not exist!");
-            }
-            if(!result.wasAcknowledged()) {
-                throw new ObjectIdException("Something wrong when saving the student!");
-            }
-            // return ResponseEntity.ok(studentService.getStudentByID(id).get());
-            Optional<Student> optionalStudent = studentService.getStudentByID(id);
-            if (optionalStudent.isPresent()) {
-                // Student student_obj = optionalStudent.get();
-                return ResponseEntity.ok(optionalStudent);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch(NumberFormatException e) {
-            throw new ParameterErrorStringException("Parameter is not a number!");
-        }
-    }*/
+    }
 }

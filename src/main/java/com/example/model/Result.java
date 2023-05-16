@@ -11,7 +11,7 @@ public class Result<T> {
     private boolean is_task;
     private boolean course_access;
     private boolean task_access;
-
+    private boolean save_succes;
     private T result;
 
     public Result() {
@@ -23,6 +23,7 @@ public class Result<T> {
         this.course_access = true;
         this.task_access = true;
         this.is_safe = true;
+        this.save_succes = true;
     }
 
     public Result(T result) {
@@ -35,6 +36,7 @@ public class Result<T> {
         this.course_access = true;
         this.task_access = true;
         this.is_safe = true;
+        this.save_succes = true;
     }
     
     public boolean isStudent() { return this.is_student; }
@@ -45,6 +47,7 @@ public class Result<T> {
     public boolean courseAccess() { return this.course_access; }
     public boolean taksAccess() { return this.task_access; }
     public boolean isSafe() { return this.is_safe; }
+    public boolean saveSuccess() { return this.save_succes; }
     public void notStudent() {
         this.is_student = false;
         this.is_safe = false;
@@ -73,6 +76,9 @@ public class Result<T> {
         this.task_access = false;
         this.is_safe = false;
     }
-
+    public void noSaveSuccess() {
+        this.save_succes = false;
+        this.is_safe = false;
+    }
     public T getResult() { return this.result;}
 }

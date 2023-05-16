@@ -35,13 +35,14 @@ public class StudentController {
     public ResponseEntity<Student>
     saveStudent(@RequestBody Student student) {
         Result<Student> result = studentService.save(student);
-        if (result.isSafe()) {
+        return ResponseEntity.ok(result.getResult()); 
+        /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if (!result.saveSuccess()) {
             throw new ResponseException("Saving student failed!!!", HttpStatus.INTERNAL_SERVER_ERROR);
         } else {
             throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
 
     @GetMapping("/{student_id}")
@@ -62,12 +63,13 @@ public class StudentController {
     public ResponseEntity<Student>
     updateStudent(@PathVariable("student_id") String id, @RequestBody Student student) {
         Result<Student> result = studentService.updateStudentByID(id, student);
-        if (result.isSafe()) {
+        return ResponseEntity.ok(result.getResult());
+        /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if (!result.isStudent()) {
             throw new ResponseException("Student does NOT exist!!!", HttpStatus.INTERNAL_SERVER_ERROR);
         } else {
             throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
 }

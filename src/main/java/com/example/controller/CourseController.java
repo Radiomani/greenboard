@@ -53,7 +53,9 @@ public class CourseController {
     public ResponseEntity<Course>
     getCourseByStudentIDandCourseID(@PathVariable("student_id") String student_id, @PathVariable("course_id") String course_id) {
         Result<Course> result = courseService.getCourseByStudentIDandCourseID(student_id, course_id);
-        if (result.isSafe()) {
+        return ResponseEntity.ok(result.getResult());
+
+        /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if (!result.isStudent()) {
             throw new ResponseException("Student does NOT exist!!!", HttpStatus.NOT_FOUND);
@@ -63,7 +65,7 @@ public class CourseController {
             throw new ResponseException("Student has NO access to course!!!", HttpStatus.NOT_ACCEPTABLE);
         } else {
             throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
     
     // @PostMapping

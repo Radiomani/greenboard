@@ -40,13 +40,14 @@ public class TaskController {
     public ResponseEntity<List<Task>>
     getTasksByStudentID(@PathVariable("student_id") String student_id) {
         Result<List<Task>> result = taskService.getTasksByStudentID(student_id);
-        if (result.isSafe()) {
+        return ResponseEntity.ok(result.getResult());
+        /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if (!result.isStudent()) {
             throw new ResponseException("Student does NOT exist!!!", HttpStatus.INTERNAL_SERVER_ERROR);
         } else {
             throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
 
     @GetMapping("/{student_id}/{task_name}")
@@ -54,7 +55,8 @@ public class TaskController {
     public ResponseEntity<Task>
     getTaskByStudentIDandTaskID(@PathVariable("student_id") String student_id, @PathVariable("task_name") String task_id) {
         Result<Task> result = taskService.getTaskByStudentIDandTaskID(student_id, task_id);
-        if (result.isSafe()) {
+        return ResponseEntity.ok(result.getResult());
+        /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if (!result.isStudent()) {
             throw new ResponseException("Student does NOT exist!!!", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -62,7 +64,7 @@ public class TaskController {
             throw new ResponseException("Taks does NOT exist!!!", HttpStatus.NOT_FOUND);
         } else {
             throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
 
     @PostMapping("/{student_id}")
@@ -70,13 +72,14 @@ public class TaskController {
     public ResponseEntity<Task>
     setTaskByStudentID(@PathVariable("student_id") String student_id, @RequestBody Task task) {
         Result<Task> result = taskService.setTaskByStudentID(student_id, task);
-        if (result.isSafe()) {
+        return ResponseEntity.ok(result.getResult());
+        /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if (!result.isStudent()) {
             throw new ResponseException("Student does NOT exist!!!", HttpStatus.INTERNAL_SERVER_ERROR);
         } else {
             throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
 
     @PutMapping("/{student_id}/{task_name}")
@@ -84,7 +87,9 @@ public class TaskController {
     public ResponseEntity<Task>
     updateTaskByStudentIDandTaskName(@PathVariable("student_id") String student_id, @PathVariable("task_id") String task_id, @RequestBody Task task) {
         Result<Task> result = taskService.updateTaskByStudentIDandTaskID(student_id, task_id, task);
-        if (result.isSafe()) {
+        return ResponseEntity.ok(result.getResult());
+
+        /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if (!result.isStudent()) {
             throw new ResponseException("Student does NOT exist!!!", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -92,7 +97,7 @@ public class TaskController {
             throw new ResponseException("Taks does NOT exist!!!", HttpStatus.NOT_FOUND);
         } else {            
             throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
 
     /*@DeleteMapping("/{student_id}/{task_name}")

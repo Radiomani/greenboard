@@ -49,7 +49,8 @@ public class AssignmentController {
     public ResponseEntity<List<Assignment>>
     getAssignmentsByStudentIDandCourseID(@PathVariable("student_id") String student_id, @PathVariable("course_id") String course_id) {
         Result<List<Assignment>> result = assignmentService.getAssignmentsByStudentIDandCourseID(student_id, course_id);
-        if (result.isSafe()) {
+        return ResponseEntity.ok(result.getResult());
+        /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if (!result.isStudent()) {
             throw new ResponseException("Student does NOT exist!!!", HttpStatus.NOT_FOUND);
@@ -59,7 +60,7 @@ public class AssignmentController {
             throw new ResponseException("Student has NO access to course!!!", HttpStatus.NOT_ACCEPTABLE);
         } else {
             throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
 
     @GetMapping("/{student_id}/{course_id}/{assignment_id}")
@@ -70,7 +71,8 @@ public class AssignmentController {
             @PathVariable("assignment_id") String assignment_id) {
         Result<Assignment> result = assignmentService.getAssignmentByStudentIDandCourseIDandByAssingmentID
                                                                     (student_id, course_id, assignment_id);
-        if (result.isSafe()) {
+        return ResponseEntity.ok(result.getResult());
+        /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if (!result.isStudent()) {
             throw new ResponseException("Student does NOT exist!!!", HttpStatus.NOT_FOUND);
@@ -82,7 +84,7 @@ public class AssignmentController {
             throw new ResponseException("Assignment does NOT exist!!!", HttpStatus.NOT_FOUND);
         } else {
             throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
 
     /*@PostMapping

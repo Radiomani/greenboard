@@ -42,7 +42,14 @@ public class AnnouncementServiceImpl implements AnnouncementService{
     @Override
     public Result<List<Announcement>>
     getAnnouncementsByStudentID(String student_id) {
-        if (studentRepository.isStudentExist(student_id)) {
+        Student student = studentRepository.getStudentByID(student_id);
+        List<String> courses = student.getCoursesTaken();
+        List<Announcement> anns = new ArrayList<>();
+        for (String course : courses) {
+            anns.addAll(announcementRepository.getAnnouncementsByCourseID(course));
+        }
+        return new Result<>(anns);
+        /*if (studentRepository.isStudentExist(student_id)) {
             Student student = studentRepository.getStudentByID(student_id);
             List<String> courses = student.getCoursesTaken();
             List<Announcement> anns = new ArrayList<>();
@@ -54,7 +61,7 @@ public class AnnouncementServiceImpl implements AnnouncementService{
             Result<List<Announcement>> result = new Result<>();
             result.notStudent();
             return result;
-        }
+        }*/
 
     }
 
@@ -62,6 +69,19 @@ public class AnnouncementServiceImpl implements AnnouncementService{
     public Result<List<Announcement>>
     getAnnouncementsByCourseIDandStudentID(String student_id, String course_id) {
         Result<List<Announcement>> result = new Result<>();
+        if (courseRepository.isCourseExist(course_id)) {
+            Student student = studentRepository.getStudentByID(student_id);
+            if (student.getCoursesTaken().contains(course_id)) {
+                return new Result<>(announcementRepository.getAnnouncementsByCourseID(course_id));
+            } else {
+                result.noCourseAccess();
+                return result;
+            }
+        } else {
+            result.notCourse();
+            return result;
+        }        
+        /*Result<List<Announcement>> result = new Result<>();
         if (studentRepository.isStudentExist(student_id)) {
             if (courseRepository.isCourseExist(course_id)) {
                 Student student = studentRepository.getStudentByID(student_id);
@@ -78,6 +98,6 @@ public class AnnouncementServiceImpl implements AnnouncementService{
         } else {
             result.notStudent();
             return result;
-        }
+        }*/
     }
 }

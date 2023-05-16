@@ -36,13 +36,14 @@ public class AnnouncementController {
     @ResponseBody
     public ResponseEntity<List<Announcement>> getAnnouncementsByStudentID(@PathVariable("student_id") String student_id) {
         Result<List<Announcement>> result = announcementService.getAnnouncementsByStudentID(student_id);
-        if (result.isSafe()) {
+        return ResponseEntity.ok(result.getResult());
+        /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if (!result.isStudent()) {
             throw new ResponseException("Student does NOT exist!!!", HttpStatus.NOT_FOUND);
         } else {
             throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
 
     @GetMapping("/{student_id}/{course_id}")
@@ -50,7 +51,8 @@ public class AnnouncementController {
     public ResponseEntity<List<Announcement>> getAnnouncementsByCourseIDandStudentID(
             @PathVariable("student_id") String student_id, @PathVariable("course_id") String course_id) {
         Result<List<Announcement>> result = announcementService.getAnnouncementsByCourseIDandStudentID(student_id, course_id);
-        if (result.isSafe()) {
+        return ResponseEntity.ok(result.getResult());
+        /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if (!result.isStudent()) {
             throw new ResponseException("Student does NOT exist!!!", HttpStatus.NOT_FOUND);
@@ -60,6 +62,6 @@ public class AnnouncementController {
             throw new ResponseException("Student has NO access to course!!!", HttpStatus.NOT_ACCEPTABLE);
         } else {
             throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
 }

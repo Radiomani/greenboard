@@ -23,7 +23,14 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public Result<List<Course>> getCoursesByStudentID(String student_id) {
-        if (studentRepository.isStudentExist(student_id)) {
+        Student student = studentRepository.getStudentByID(student_id);
+        List<String> course_ids  = student.getCoursesTaken();
+        List<Course> courses = new ArrayList<>();
+        for (String course_id : course_ids) {
+            courses.add(courseRepository.findCourseByCourseID(course_id));
+        }
+        return new Result<>(courses);
+        /*if (studentRepository.isStudentExist(student_id)) {
             Student student = studentRepository.getStudentByID(student_id);
             List<String> course_ids  = student.getCoursesTaken();
             List<Course> courses = new ArrayList<>();
@@ -35,12 +42,13 @@ public class CourseServiceImpl implements CourseService{
             Result<List<Course>> result = new Result<>();
             result.notStudent();
             return result;             
-        } 
+        }*/
     }
 
     @Override
     public Result<Course> getCourseByStudentIDandCourseID(String student_id, String course_id) {
-        Result<Course> result = new Result<>();
+        return new Result<>(courseRepository.findCourseByCourseID(course_id));
+        /*Result<Course> result = new Result<>();
         if (studentRepository.isStudentExist(student_id)) {
             if (courseRepository.isCourseExist(course_id)) {
                 Student student = studentRepository.getStudentByID(student_id);
@@ -57,6 +65,6 @@ public class CourseServiceImpl implements CourseService{
         } else {
             result.notStudent();
             return result;             
-        } 
+        }*/
     }
 }

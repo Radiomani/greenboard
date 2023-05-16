@@ -26,7 +26,14 @@ public class AssignmentServiceImpl implements AssignmentService{
     private CourseRepository courseRepository;
 
     public Result<List<Assignment>> getAssignmentsByStudentID(String student_id){
-        if (studentRepository.isStudentExist(student_id)) {
+        Student student = studentRepository.getStudentByID(student_id);
+        List<String> courses = student.getCoursesTaken();
+        List<Assignment> ass = new ArrayList<>();
+        for (String course : courses) {
+            ass.addAll(assignmentRepository.getAssignmentsByCourseID(course));
+        }
+        return new Result<>(ass);
+        /*if (studentRepository.isStudentExist(student_id)) {
             Student student = studentRepository.getStudentByID(student_id);
             List<String> courses = student.getCoursesTaken();
             List<Assignment> ass = new ArrayList<>();
@@ -38,12 +45,13 @@ public class AssignmentServiceImpl implements AssignmentService{
             Result<List<Assignment>> result = new Result<>();
             result.notStudent();
             return result;
-        }
+        }*/
     }
 
     @Override
     public Result<List<Assignment>> getAssignmentsByStudentIDandCourseID(String student_id, String course_id) {
-        Result<List<Assignment>> result = new Result<>();
+        return new Result<>(assignmentRepository.getAssignmentsByCourseID(course_id));
+        /*Result<List<Assignment>> result = new Result<>();
         if (studentRepository.isStudentExist(student_id)) {
             if (courseRepository.isCourseExist(course_id)) {
                 Student student = studentRepository.getStudentByID(student_id);
@@ -60,12 +68,28 @@ public class AssignmentServiceImpl implements AssignmentService{
         } else {
             result.notStudent();
             return result;             
-        } 
+        }*/
     }
 
     @Override
     public Result<Assignment> getAssignmentByStudentIDandCourseIDandByAssingmentID(String student_id, String course_id, String assingment_id) {
         Result<Assignment> result = new Result<>();
+        List<Assignment> asses =  assignmentRepository.getAssignmentsByCourseID(course_id);
+        boolean found = false;
+        Assignment ass = new Assignment();
+        for (Assignment a: asses) {
+            if (assingment_id == a.getAssignmentID()) {
+                ass = a;
+                found = true;
+                break;
+            }
+        }
+        if (found) return new Result<>(ass);
+        else {
+            result.notAssignment();
+            return result;
+        }
+        /*Result<Assignment> result = new Result<>();
         if (studentRepository.isStudentExist(student_id)) {
             if (courseRepository.isCourseExist(course_id)) {
                 Student student = studentRepository.getStudentByID(student_id);
@@ -96,7 +120,7 @@ public class AssignmentServiceImpl implements AssignmentService{
         } else {
             result.notStudent();
             return result;             
-        } 
+        }*/
     }
 
     /* 

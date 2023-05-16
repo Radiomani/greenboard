@@ -1,4 +1,4 @@
-student_id,name,email,courses_taken
+student_id,name,email,courses_list
 20182014,Mai Man,man@unist.a.kr,CSE333 SLA46101 CSE345
 20182028,Aday Zharassov,aday@yahoo.com,CSE345 SLA46101 CSE468
 20182011,Kim Vyachevla,Slava@unist.kr,SLA46101 CSE345 CSE333

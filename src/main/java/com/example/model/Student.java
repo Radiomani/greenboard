@@ -27,6 +27,7 @@ public class Student {
 	}
 
 	public Student() {
+		List<String> courses_taken = Arrays.asList("CSE333","CSE345","SLA46101","CSE402","CSE468");
     }
 
 

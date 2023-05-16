@@ -19,6 +19,10 @@ public class Course {
 	private String course_name;
 	private String professor_name;
 
+	public Course() {
+		
+	}
+
 	public Course(String course_id, String course_name, String professor_name) {
 		this.course_id = course_id;
 		this.course_name = course_name;

@@ -171,3 +171,12 @@ Expected Output:
     }
 ]
 
+```bash
+- [x]  - [ ]  curl -X POST -H "Content-Type: application/json" -d '{"student_id": "20182011", "task_id": "13", "task_name": "philosophy", "description": "Reflecting on why I chose CS dept", "deadline": 0, "priority": "high"}' http://localhost:8080/calendar/tasks/20182011
+
+```
+
+Expected Output:
+
+{"student_id": "20182011", "task_id": "13", "task_name": "philosophy", "description": "Reflecting on why I chose CS dept", "deadline": 0, "priority": "high"}
+

@@ -36,15 +36,16 @@ public class StudentServiceImpl implements StudentService{
 
     @Override
     public Result<Student> getStudentByID(String student_id) {
-        if (!studentRepository.isStudentExist(student_id)) {
+        return new Result<Student>(studentRepository.getStudentByID(student_id));
+        /*if (studentRepository.isStudentExist(student_id)) {
             return new Result<>(studentRepository.getStudentByID(student_id));
         } else {
             Result<Student> result = new Result<>();
             result.notStudent();
             return result;             
-        } 
+        }*/
     }
-    
+
     @Override
     public Result<Student> updateStudentByID(String student_id, Student new_student) {
         if (studentRepository.isStudentExist(student_id)) {

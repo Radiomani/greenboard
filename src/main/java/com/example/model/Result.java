@@ -51,7 +51,7 @@ public class Result<T> {
     public boolean saveSuccess() { return this.save_succes; }
     public void notStudent() {
         this.is_student = false;
-        this.is_safe = false;
+        //this.is_safe = false;
     }
     public void notAnnouncement() {
         this.is_announcement = false;

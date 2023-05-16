@@ -48,6 +48,7 @@ public class StudentController {
     public ResponseEntity<Student>
     getStudent(@PathVariable("student_id") String id) {
         Result<Student> result = studentService.getStudentByID(id);
+        return ResponseEntity.ok(result.getResult());
         if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if (!result.isStudent()) {

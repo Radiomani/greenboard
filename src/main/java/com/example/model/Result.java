@@ -12,6 +12,7 @@ public class Result<T> {
     private boolean course_access;
     private boolean task_access;
     private boolean save_succes;
+    private String message;
     private T result;
 
     public Result() {

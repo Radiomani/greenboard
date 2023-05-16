@@ -20,7 +20,7 @@ public class Course {
 	private String professor_name;
 
 	public Course() {
-		
+
 	}
 
 	public Course(String course_id, String course_name, String professor_name) {

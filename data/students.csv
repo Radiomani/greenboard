@@ -1,10 +1,10 @@
-student_id,name,email,courses_taken.0,courses_taken.1,courses_taken.2
-20182014,Mai Man,man@unist.a.kr,CSE333,SLA46101,CSE345
-20182028,Aday Zharassov,aday@yahoo.com,CSE345,SLA46101,CSE468
-20182011,Kim Vyachevla,Slava@unist.kr,SLA46101,CSE345,CSE333
-20171120,Yeonsin Ha,yha@snu.ac.kr,CSE402,CSE333,CSE468
-20991203,yangdong Geun,yage@kaist.ac.kr,CSE468,CSE402,SLA46101
-20232301,HongGi Dong,hong46@dgist.ac.kr,CSE402,SLA46101,CSE468
-20161562,Park Chung Ha,cha13@gmail.com,CSE345,CSE468,CSE333
-20202022,Aidan partria,Aida44@pnu.ac.kr,CSE333,CSE402,CSE402
-20231357,Lesly Ryan,ryan55@ucla.ca,CSE468,CSE333,SLA46101
+student_id,name,email,courses_taken
+20182014,Mai Man,man@unist.a.kr,CSE333 SLA46101 CSE345
+20182028,Aday Zharassov,aday@yahoo.com,CSE345 SLA46101 CSE468
+20182011,Kim Vyachevla,Slava@unist.kr,SLA46101 CSE345 CSE333
+20171120,Yeonsin Ha,yha@snu.ac.kr,CSE402 CSE333 CSE468
+20991203,yangdong Geun,yage@kaist.ac.kr,CSE468 CSE402 SLA46101
+20232301,HongGi Dong,hong46@dgist.ac.kr,CSE402 SLA46101 CSE468
+20161562,Park Chung Ha,cha13@gmail.com,CSE345 CSE468 CSE333
+20202022,Aidan partria,Aida44@pnu.ac.kr,CSE333 CSE402 CSE402
+20231357,Lesly Ryan,ryan55@ucla.ca,CSE468 CSE333 SLA46101

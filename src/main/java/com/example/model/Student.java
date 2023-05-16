@@ -19,7 +19,17 @@ public class Student {
 	private String email;
 	private List<String> courses_taken;
 
-	public Student() {
+	private List<String> toListFuck(String courses_list) {
+	String[] parts = courses_list.split(" ");
+	List<String> partsList = Arrays.asList(parts);
+		return partsList;
+	}
+
+	public Student(String student_id, String name, String email, String courses_list) {
+		this.student_id = student_id;
+		this.name = name;
+		this.email = email;
+		this.courses_taken = toListFuck(courses_list);
     }
 
 	public String getStudentID() { return this.student_id; }

@@ -21,7 +21,7 @@ import com.example.model.Course;
 import com.example.service.CourseService;
 
 @RestController
-@RequestMapping("greenboard/courses")
+@RequestMapping("/dashboard/courses")
 public class CourseController {
 
     @Autowired
@@ -38,13 +38,14 @@ public class CourseController {
     public ResponseEntity<List<Course>>
     getCoursesByStudentID(@PathVariable("student_id") String student_id) {
         Result<List<Course>> result = courseService.getCoursesByStudentID(student_id);
-        if (result.isSafe()) {
+        return ResponseEntity.ok(result.getResult());
+        /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if(!result.isStudent()) {
             throw new ResponseException("Student does NOT exist!!!", HttpStatus.NOT_FOUND);
         } else {
             throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
 
     @GetMapping("/{student_id}/{course_id}")

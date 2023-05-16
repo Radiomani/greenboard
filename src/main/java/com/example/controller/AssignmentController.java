@@ -36,6 +36,7 @@ public class AssignmentController {
     public ResponseEntity<List<Assignment>>
     getAssignmentsByStudentID(@PathVariable("student_id") String student_id) {
         Result<List<Assignment>> result = assignmentService.getAssignmentsByStudentID(student_id);
+        return ResponseEntity.ok(result.getResult());
         /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if(!result.isStudent()) {

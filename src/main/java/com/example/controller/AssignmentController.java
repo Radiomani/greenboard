@@ -36,13 +36,13 @@ public class AssignmentController {
     public ResponseEntity<List<Assignment>>
     getAssignmentsByStudentID(@PathVariable("student_id") String student_id) {
         Result<List<Assignment>> result = assignmentService.getAssignmentsByStudentID(student_id);
-        if (result.isSafe()) {
+        /*if (result.isSafe()) {
             return ResponseEntity.ok(result.getResult());
         } else if(!result.isStudent()) {
             throw new ResponseException("Student does NOT exist!!!", HttpStatus.NOT_FOUND);
         } else {
             throw new ResponseException("Something wrong happens!!!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
     
     @GetMapping("/{student_id}/{course_id}")

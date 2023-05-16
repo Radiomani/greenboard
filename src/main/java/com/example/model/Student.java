@@ -3,6 +3,7 @@ package com.example.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
+import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
